@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.7",
-  "version_code": 7,
-  "published_at": "2026-10-27T16:05:03Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.7",
-  "apk_name": "galaxy-watch-manager-free-0.0.7.apk",
-  "apk_size": 14221698,
-  "sha256": "40d2674118fb14abadd3bf14473d59d4cc8c9f50a11202897c154df49ded8e83",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/apk/galaxy-watch-manager-free-0.0.7.apk",
-  "notes": "## 0.0.7\n\n- **修复今日步数低于手表（实机 4269 步对齐）**：\n  - 突破 Wear Channel 健康大包接收链路，支持 `inner tag 16`、`fixed64` 通道 ID 与外层信封分片重组；首次同步或当天缺少完整覆盖时请求历史回补，按完整区间记录重建今日总数。\n  - 实机验证：接收 581,344 字节历史大包，今日 99 条记录合计 4269，手机 App 与手表完全对齐；无需手动补差值，无需安装手表端辅助程序。\n  - 同 UUID 记录修订支持差额合并与持久化，覆盖重复回补、重启恢复和跨日重建。\n- **大包健康数据全面覆盖**：\n  - 呼吸率支持 `average` 字段并解析逐分钟分箱采样。\n  - 楼层支持 `floor` 字段，去重累加真实层数。\n  - HRV（心率变异性）支持解包嵌套的 Base64/gzip 分箱，提取 `rmssd` 与 `sdnn`。\n  - 睡眠分期支持 `sleep_id` 外键关联，无分期明细时允许 `sleep_duration` 兜底。\n  - 心率图表纵轴自适应跨度与采样去重修复。\n- **重构健康数据流架构**：\n  - 引入 `HealthRecordStore` 统一按记录修订保存，`HealthDataProjection` 集中单向推导展示值，彻底杜绝重发报文重复加权与跨会话状态漂移。\n- **App 图标全新重绘**：\n  - 手表主体缩小、留白边距增加 3.5 倍（画布占用比从 60% 收敛至标准的 42%），更轻盈舒展。\n  - 表盘改用极简包豪斯 10:10 智能双针（纯白时针 + Electric Blue 品牌蓝分针 + Mint Cyan 卫星光点），搭配 12/3/6/9 极简刻度，去除杂乱折线。\n  - 还原 Galaxy Watch 标志性右侧双平键（Home 键蓝圈点缀）与带柔和圆角的流线型亲肤表带。\n  - 同步重绘 Android 13+ 动态着色单色矢量图及全套 DPI 位图。\n\n## 0.0.6\n\n- **心率详情**：健康页的心率数字可点击，打开后展示今日曲线与近 7 天变化。\n  - 今日曲线：横轴 0–24 时，纵轴按当日范围自适应（至少 20 bpm 跨度），每个采样点用圆点标出，下方标注纵轴区间。\n  - 今日统计：最低 /"
+  "version_name": "0.0.8",
+  "version_code": 8,
+  "published_at": "2026-10-27T18:14:17Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.8",
+  "apk_name": "galaxy-watch-manager-free-0.0.8.apk",
+  "apk_size": 14287234,
+  "sha256": "70e83dc98e59eb22fdb13339f04e9d27cffeeab58ad7f3313cb7a6ef4ce716bc",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/apk/galaxy-watch-manager-free-0.0.8.apk",
+  "notes": "## 0.0.8\n\n- **界面与导航重做**：参考 FlClash Android 的页面结构、字号和表面层级，重排概览、健康、通知、设置和表盘页面。悬浮胶囊导航外围透明，内容可从后方滚动；修复主 Tab 切换时旧页面闪现，以及设置进入、返回时布局跳动的问题。\n- **亮暗主题与配色**：支持壁纸动态配色，以及海洋蓝、鸢尾紫、薄荷绿；充电、活动、心率、睡眠采用不同功能色。彩色卡片内嵌区域沿用同一色系，改善浅色模式下灰色区块突兀的问题。增加连接、同步及充电状态动效，充满后停止充电流光。\n- **启动连接与同步提速**：实现 Wear Asset 文件分块接收、SHA-1 摘要校验、原子落盘及 AckAsset 确认，解决未确认文件在每次重连时重复传输的问题；DataItem 同步改用持久化的真实来源游标。实机确认 23 个文件后，三次冷启动的当前表盘查询分别约 108 / 114 / 152ms 收到新回包，发起连接至表盘更新约 2 秒。首次或新增文件仍需实际传输。\n- **修复重启后表盘未知**：保存上次确认的设备资料和表盘，启动后自动查询并有限重试；空回执不再清空已知表盘，界面区分缓存展示和正在刷新。\n- **健康历史查看**：新增步数详情，支持今日活动、近 7 天趋势与逐日历史；睡眠、心率及其他健康指标提供相应详情和历史趋势入口。\n- **运动记录修正**：距离保留小数米，汇总后再格式化；补充运动日期、秒级有效运动时长、自动识别标记、步数及心率详情。8 条实机健走合计 8732.66 米，与原始距离和速度/有效时长关系一致；未收到经纬度的记录明确显示“未收到地图轨迹”。\n- **设置与信息展示**：设备信息默认展开，长字段支持选择复制；全部配置优先显示中文名称、分类与取值，支持中文搜索，原始协议字段可展开查看；用途未确认的字段明确标注。\n- **通知入口整理**：测试通知统一放在概览，通知页保留真实转发开关和权限引导。\n- **验证**：198 项 Android 单元测试通过，Lint 与 Release 构建通过；已在 Honor Magic8 Pro 与 Galaxy Watch Ultra 上完成冷启动、主题切换、导航和运动记录检查。\n\n## 0.0.7\n\n- **修复今日步数低于手表（实机 4269 步对齐）**：\n  - 突破 Wear Chann"
 }
