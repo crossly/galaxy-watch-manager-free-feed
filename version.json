@@ -1,9 +1,9 @@
 {
-  "version_name": "0.0.4",
-  "version_code": 4,
-  "published_at": "2026-10-27T03:42:06Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.4",
-  "apk_name": "galaxy-watch-manager-free-0.0.4.apk",
-  "sha256": "e760f523da8d8d1f8c5dd9fc172e08c595b931d9f0ef3378bffc562928b189e5",
-  "notes": "## 0.0.4\n\n- **新图标**：白底 + 深色表壳、钢色表圈，银河螺旋绘在表盘上；去掉旧图标外围的星星、轨道线与装饰弧线，缩小后仍可辨认成一块手表。自适应图标、单色主题版与各 DPI PNG 同步重生成。\n- **启动自动连接**：进程启动及回到前台时，从系统已配对列表里识别手表并拉起连接。优先上次成功使用的 MAC（仍在配对列表中时），否则按名称评分（`Galaxy Watch` > `SM-L…` > 含 `watch` > `Gear`），忽略耳机等非手表设备。\n  - 顶栏新增「连接」按钮；设置 → 设备连接新增「启动时自动连接手表」开关与「自动查找并连接」按钮。\n  - 手动「断开」只暂停本次运行，重新启动应用后恢复；蓝牙权限未授予时等授权后自动重试；系统限制后台启动前台服务时仅记录日志，前台再试。\n- 图标生成脚本在缺少 `cairosvg` 时可回退到 headless Chrome 渲染。\n- **更新检测（GitHub Releases）**：设置页新增「关于与更新」，显示当前版本、最近检查时间与结果，发现新版本时展示 release notes 摘要并可一键打开发布页。启动时最多每 12 小时自动检查一次。\n  - 应用仓库是私有的（未认证访问 GitHub API 实测 **404**），因此多了一个公开的只读 feed 仓库 `crossly/galaxy-watch-manager-free-feed`：release 工作流在打标签后把 `version_name`/`version_code`/`page_url`/`apk_name`/`sha256`/`notes` 写入其中的 `version.json`。**不需要任何令牌**。\n  - 跨仓库写入用只对 feed 仓库有写权限的 deploy key（存在 Actions secret `FEED_DEPLOY_KEY`），不使用个人 token；feed 写入失败只记为失败步骤，不回滚已签名的 release。\n  - 只做检测与跳转，不在 App 内下载或安装 APK；新增 `INTERNET` / `ACCESS_NETWORK_STATE` 权限，并关闭明文流量。\n  - 版本比较以 `version_code` 为主，缺失时退化为版本名逐段比较；清单不完整时不"
+  "version_name": "0.0.5",
+  "version_code": 5,
+  "published_at": "2026-10-27T05:01:04Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.5",
+  "apk_name": "galaxy-watch-manager-free-0.0.5.apk",
+  "sha256": "7717f469bbf4483ac91867734d499c79c067cb1c490db830ab9f821909daf171",
+  "notes": "## 0.0.5\n\n- **健康页重做：以三星健康的指标逻辑展示今日状态**\n  - **睡眠监测（新增）**：\n    - 逆向支持三星健康的三套睡眠模块：`com.samsung.shealth.sleep`（会话主表）、`com.samsung.shealth.sleep_data`（`sleep_status` 的 Base64/gzip 时序 blob）、`com.samsung.shealth.sleep_stage`（离散分期记录）。\n    - 完整还原三星健康的 4 档分期码：`40001` 清醒、`40002` 浅睡、`40003` 深睡、`40004` 快速眼动（REM）。\n    - 呈现**睡眠总时长、起止时间、睡眠评分（quality 0–100）与睡眠效率（efficiency %）**。\n    - **分期结构比例条** + **四阶段时长明细图例**（深睡 / 浅睡 / REM / 清醒 时长）。\n    - **睡眠时序图（Hypnogram）**：四行分别对应四种状态，横向按真实时间轴绘制夜间起伏，一眼看出中途醒来几次、深睡何时发生。\n    - **近 7 天睡眠趋势**：以醒来日期归纳的近 7 天时长柱状图。\n    - 无数据时展示友好引导，不做占位假数据。\n  - 步数改成**目标进度环**：42sp 大号步数居中，环内标注目标值与完成百分比；达标后圆环转为绿色并显示「已达标」。\n  - 新增**今日活动分布**：按 10 分钟分桶（`binning_data[].index`）聚合成 24 小时柱状图，高亮当前小时，并用一句话给出最活跃时段。\n  - 新增**里程碑**：10K / 20K / 30K / 40K 单日步数阶梯（阈值取自三星健康 `step_milestone_*_steps`）。\n  - 新增**连续达标**：按本地逐日历史计算 streak，并给出下一个徽章门槛（7 / 14 / 21 / 28 天，对应 `step_streak_*_week_streak`）。\n  - 新增**本周步数**：最近 7 天柱状图 + 目标参考虚线，今日柱高亮。\n  - 健康页不再展示模块清单与报文流水，这些调试信息保留在设置 → 诊断控制台。\n- **每日步数目标**：底部弹层设置目标，取值对齐三星健康的活动目标"
 }
