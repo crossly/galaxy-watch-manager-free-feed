@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.6",
-  "version_code": 6,
-  "published_at": "2026-10-27T09:32:42Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.6",
-  "apk_name": "galaxy-watch-manager-free-0.0.6.apk",
-  "apk_size": 14225794,
-  "sha256": "b4ca2b87fe8ecf8a10271c180d5e532207b4d05c3afe274a330794251a24b858",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/apk/galaxy-watch-manager-free-0.0.6.apk",
-  "notes": "## 0.0.6\n\n- **心率详情**：健康页的心率数字可点击，打开后展示今日曲线与近 7 天变化。\n  - 今日曲线：横轴 0–24 时，纵轴按当日范围自适应（至少 20 bpm 跨度），每个采样点用圆点标出，下方标注纵轴区间。\n  - 今日统计：最低 / 平均 / 最高，右上角显示最近一次测量值。\n  - 近 7 天：柱子为日均值，须线为当日最低–最高，缺数据的日子留空不插值。\n  - 采样点全部来自手表 `tracker.heart_rate` 记录，按 `start_time` 落点、按 `(时间, 值)` 去重，本地保留最近 24 小时（最多 600 点），逐日汇总持久化。\n  - 无记录时只显示「佩戴手表并完成一次测量后显示曲线」，不绘制假曲线。\n- **更多健康指标**（血氧 / 皮肤温度 / 呼吸频率 / HRV）：\n  - 健康页新增「更多指标」磁贴网格，点击展开指标详情弹窗。\n  - 详情含今日采样曲线（0–24 时、纵轴自适应）、最低/平均/最高与近 7 天日均柱状趋势。\n  - 自动过滤无效异常值（SpO₂ 50–100%、皮温 20–42°C、呼吸 4–60 次/分、HRV 1–300 ms）。\n  - 保留最近 7 天采样点，同时间戳同数值去重。\n- **爬楼层数**：\n  - 解析 `floors_climbed` 区间记录，按 `datauuid` 去重累加。\n  - 自然日自动重置，保留 300 条记录防重复。\n- **运动记录**：\n  - 解析 `com.samsung.shealth.exercise` 历史与实时记录。\n  - 支持 45 种常用运动类型中文展示（健走、跑步、越野跑、骑行、游泳、力量器械等，编码对齐 `SportTypeConstants`）。\n  - 显示起止时间、用时、距离、消耗千卡、平均与最大心率。\n  - 今日运动自动汇总（次数、总时长、总消耗），支持查看全部历史（最多 40 条）。\n- **应用内更新（直接下载安装）**：\n  - 发现新版本后自动从公开 feed 仓库下载 APK，不再只是跳转 GitHub 发布页。\n  - 下载完成后先校验 SHA-256，再比对签名证书必须与本机版本一致，通过后由「安装」按钮调起系统安装器。\n  - 设置页卡片实时显示下载进度（百分比、已下载/总大小）与校验"
+  "version_name": "0.0.7",
+  "version_code": 7,
+  "published_at": "2026-10-27T16:05:03Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.7",
+  "apk_name": "galaxy-watch-manager-free-0.0.7.apk",
+  "apk_size": 14221698,
+  "sha256": "40d2674118fb14abadd3bf14473d59d4cc8c9f50a11202897c154df49ded8e83",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/apk/galaxy-watch-manager-free-0.0.7.apk",
+  "notes": "## 0.0.7\n\n- **修复今日步数低于手表（实机 4269 步对齐）**：\n  - 突破 Wear Channel 健康大包接收链路，支持 `inner tag 16`、`fixed64` 通道 ID 与外层信封分片重组；首次同步或当天缺少完整覆盖时请求历史回补，按完整区间记录重建今日总数。\n  - 实机验证：接收 581,344 字节历史大包，今日 99 条记录合计 4269，手机 App 与手表完全对齐；无需手动补差值，无需安装手表端辅助程序。\n  - 同 UUID 记录修订支持差额合并与持久化，覆盖重复回补、重启恢复和跨日重建。\n- **大包健康数据全面覆盖**：\n  - 呼吸率支持 `average` 字段并解析逐分钟分箱采样。\n  - 楼层支持 `floor` 字段，去重累加真实层数。\n  - HRV（心率变异性）支持解包嵌套的 Base64/gzip 分箱，提取 `rmssd` 与 `sdnn`。\n  - 睡眠分期支持 `sleep_id` 外键关联，无分期明细时允许 `sleep_duration` 兜底。\n  - 心率图表纵轴自适应跨度与采样去重修复。\n- **重构健康数据流架构**：\n  - 引入 `HealthRecordStore` 统一按记录修订保存，`HealthDataProjection` 集中单向推导展示值，彻底杜绝重发报文重复加权与跨会话状态漂移。\n- **App 图标全新重绘**：\n  - 手表主体缩小、留白边距增加 3.5 倍（画布占用比从 60% 收敛至标准的 42%），更轻盈舒展。\n  - 表盘改用极简包豪斯 10:10 智能双针（纯白时针 + Electric Blue 品牌蓝分针 + Mint Cyan 卫星光点），搭配 12/3/6/9 极简刻度，去除杂乱折线。\n  - 还原 Galaxy Watch 标志性右侧双平键（Home 键蓝圈点缀）与带柔和圆角的流线型亲肤表带。\n  - 同步重绘 Android 13+ 动态着色单色矢量图及全套 DPI 位图。\n\n## 0.0.6\n\n- **心率详情**：健康页的心率数字可点击，打开后展示今日曲线与近 7 天变化。\n  - 今日曲线：横轴 0–24 时，纵轴按当日范围自适应（至少 20 bpm 跨度），每个采样点用圆点标出，下方标注纵轴区间。\n  - 今日统计：最低 /"
 }
