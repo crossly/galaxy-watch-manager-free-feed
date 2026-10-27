@@ -1,9 +1,9 @@
 {
-  "version_name": "0.0.3",
-  "version_code": 3,
-  "published_at": "2026-10-27T02:51:21Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.3",
-  "apk_name": "galaxy-watch-manager-free-0.0.3.apk",
-  "sha256": "c5139b0465ec4bd0177a40ecb336afaf6c6acedccb9a926e5c498af3e22e62ca",
-  "notes": "健康后台自动同步、健康数据归并修复、连接生命周期加固。"
+  "version_name": "0.0.4",
+  "version_code": 4,
+  "published_at": "2026-10-27T03:42:06Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.4",
+  "apk_name": "galaxy-watch-manager-free-0.0.4.apk",
+  "sha256": "e760f523da8d8d1f8c5dd9fc172e08c595b931d9f0ef3378bffc562928b189e5",
+  "notes": "## 0.0.4\n\n- **新图标**：白底 + 深色表壳、钢色表圈，银河螺旋绘在表盘上；去掉旧图标外围的星星、轨道线与装饰弧线，缩小后仍可辨认成一块手表。自适应图标、单色主题版与各 DPI PNG 同步重生成。\n- **启动自动连接**：进程启动及回到前台时，从系统已配对列表里识别手表并拉起连接。优先上次成功使用的 MAC（仍在配对列表中时），否则按名称评分（`Galaxy Watch` > `SM-L…` > 含 `watch` > `Gear`），忽略耳机等非手表设备。\n  - 顶栏新增「连接」按钮；设置 → 设备连接新增「启动时自动连接手表」开关与「自动查找并连接」按钮。\n  - 手动「断开」只暂停本次运行，重新启动应用后恢复；蓝牙权限未授予时等授权后自动重试；系统限制后台启动前台服务时仅记录日志，前台再试。\n- 图标生成脚本在缺少 `cairosvg` 时可回退到 headless Chrome 渲染。\n- **更新检测（GitHub Releases）**：设置页新增「关于与更新」，显示当前版本、最近检查时间与结果，发现新版本时展示 release notes 摘要并可一键打开发布页。启动时最多每 12 小时自动检查一次。\n  - 应用仓库是私有的（未认证访问 GitHub API 实测 **404**），因此多了一个公开的只读 feed 仓库 `crossly/galaxy-watch-manager-free-feed`：release 工作流在打标签后把 `version_name`/`version_code`/`page_url`/`apk_name`/`sha256`/`notes` 写入其中的 `version.json`。**不需要任何令牌**。\n  - 跨仓库写入用只对 feed 仓库有写权限的 deploy key（存在 Actions secret `FEED_DEPLOY_KEY`），不使用个人 token；feed 写入失败只记为失败步骤，不回滚已签名的 release。\n  - 只做检测与跳转，不在 App 内下载或安装 APK；新增 `INTERNET` / `ACCESS_NETWORK_STATE` 权限，并关闭明文流量。\n  - 版本比较以 `version_code` 为主，缺失时退化为版本名逐段比较；清单不完整时不"
 }
