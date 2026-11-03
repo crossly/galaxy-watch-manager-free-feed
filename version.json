@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.23",
-  "version_code": 23,
-  "published_at": "2026-11-02T16:14:29Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.23",
-  "apk_name": "galaxy-watch-manager-free-0.0.23.apk",
+  "version_name": "0.0.24",
+  "version_code": 24,
+  "published_at": "2026-11-03T01:03:21Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.24",
+  "apk_name": "galaxy-watch-manager-free-0.0.24.apk",
   "apk_size": 22885796,
-  "sha256": "ca1f6b524941034635cd25e8583980e86cfa33751e56e345724651c6d74d45e4",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f5505d0714280b11778fe1e94e6328d2b4db8352/galaxy-watch-manager-free-0.0.23.apk",
-  "notes": "## 0.0.23\n\n- **血压校准恢复为手表端直连**：撤销 0.0.22 将校准转交给手机版三星健康监测器的路线。WatchFree 重新通过现有 WCS `/991` 的 `measuring/do_calibration` 直接呼起手表 `BpMainActivity` / `BpCalibrationActivity`，三轮袖带采样、个人特征合并、`shm-bp.so` 计算和校准记录全部保留在手表端。手机端无需安装三星健康监测器，也不依赖校准交接、Shizuku 或暂停 WatchFree 连接。\n- **校准结果自动回读**：手表完成校准或测量并主动上传 `com.samsung.health.bp` / `configuration` 后，应用先可靠落盘并确认整批同步，再自动查询 `information` 刷新 `calibration_time`、`need_to_recal` 与服务状态；BP 页同时提供手动刷新和明确的直连校准入口。\n- **协议可靠性**：`do_calibration` 发送前要求健康监测器传输已进入 READY，失败返回可操作错误；保留非空校准配置归档、按 `datauuid` 刷新、强制重校准识别及断线/超时状态清理。\n- **验证边界**：413 项 JVM 单元测试、24 项脚本测试和 1,130 项双语资源检查通过；Spotless、Lint 与 Release 构建通过。Watch 4 / 5 / 6 的直连入口来自两版 Watch SHM 静态对比与协议回归，仍待对应真机完成三轮袖带和重传验收。\n\n## 0.0.22\n\n- **（0.0.23 已撤回）官方血压校准交接闭环**：该版本曾把校准/重校准入口交给手机版三星健康监测器，并暂停本应用连接、启停官方组件后重连。该路线错误地引入手机端机型/环境校验与官方软件强依赖，不符合 WatchFree 脱离三星手机软件独立使用的目标。\n- **校准配置与状态确认**：非空 `com.samsung.health.bp.configuration` 不再阻塞同批血压记录。配置原文按设备、`datauuid` 与修订时间归档，配置和记录均可靠保存后才确认同步；同时识别 `need_to_recal`，并在本地校准到期或页面恢复时重新计算状态。\n- **设备护理与监测提"
+  "sha256": "96ed459c11f8d1a2cf1bf2f49b8013b5d00eb976429ff256082bcd00b71430e3",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/64c607e9a4bbaec0ed783c5360d3249b2d3b85bf/galaxy-watch-manager-free-0.0.24.apk",
+  "notes": "## 0.0.24\n\n- **解耦接收与连接生命周期**：为当前 WCS 会话引入有界异步接收队列 `SessionReceiveQueue`（容量 64 帧 / 8 MiB），将协议封包解析、Protobuf 反序列化与健康数据落盘移出 `WatchController` 全局监视器，彻底消除大包接收与控制器生命周期管理（重连/停止/换表）之间的监视器争用与反向等待；入队与执行均受请求代次（generation）与活动状态约束，断开或切换设备立即废弃过期待发包，防止过时会话污染新设备状态。\n- **页面状态投影与 Compose 重组隔离**：将跨域单体 `WatchState` 分解为按页面隔离的状态投影（`WatchPage.DASHBOARD`、`HEALTH`、`NOTIFICATIONS`、`SETTINGS`、`WATCH_FACE`）与刷新专用状态（`RefreshActionState`）；通过 `map { page.projection(it) }.distinctUntilChanged()` 隔离状态变化，步数、心率等后台健康数据同步不再引发概览、设置或根容器的不必要重组。\n- **健康数据归一化与持久化效率提升**：`HealthRecordStore` 引入单次遍历字段归一化（`normalizedIdentity`），消除 `merge` 与 `replaceTodaySteps` 中对已归一化记录的二次 JSON 序列化与解析往返，大幅降低大批次同步 CPU 开销；在健康数据入队、解码、提交及确认全链路严格执行 `isActive()` 校验，维持 Durable-before-ACK 事务完整性。\n- **验证边界**：417 项 JVM 单元测试、24 项脚本测试和 1,130 项双语资源检查通过；Spotless、Lint 与 Release 构建通过。\n\n## 0.0.23\n\n- **血压校准恢复为手表端直连**：撤销 0.0.22 将校准转交给手机版三星健康监测器的路线。WatchFree 重新通过现有 WCS `/991` 的 `measuring/do_calibration` 直接呼起手表 `BpMainActivity` / `BpCalibrationActivity`，三轮袖带采样、个人特征合并、`shm-bp"
 }
