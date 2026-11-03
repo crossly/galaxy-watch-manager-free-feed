@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.26",
-  "version_code": 26,
-  "published_at": "2026-11-03T05:04:40Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.26",
-  "apk_name": "galaxy-watch-manager-free-0.0.26.apk",
+  "version_name": "0.0.27",
+  "version_code": 27,
+  "published_at": "2026-11-03T12:55:59Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.27",
+  "apk_name": "galaxy-watch-manager-free-0.0.27.apk",
   "apk_size": 22902180,
-  "sha256": "acc8d408e58ad7a08c7f0d9662c61dfdbb85e9480aa54dad4d61a6a2744f574d",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1d1704b8a1df277bf4ecd19a02bc2fc143f4517d/galaxy-watch-manager-free-0.0.26.apk",
-  "notes": "## 0.0.26\n\n- **Google Wear DataMap 协议默认值线缆省略完整解码**：解决 Galaxy Watch 7 Ultra 及全系 Wear OS 手表在非三星手机上“抬腕亮屏”（`wake_on_wrist_raised`）等快捷开关点击下发后，UI 无法收到关闭反馈、开关始终常亮的问题。根据 Wear OS 官方 Protobuf nano 规范，当标量值等于默认值（`false`、`0`、`0L`、`\"\"`）时，wire 层会省略传输字段及空负载对象；重构 `DataMapDecoder`，严格依据 `hqc.type` 类型标签派发并补齐默认值，系统性修复 17 项布尔设置（AOD、触摸唤醒、旋转表圈唤醒、勿扰同步、手势等关闭回包）、整型零值（15 秒屏幕超时 `intSelectedItem = 0`、左手佩戴 `intLevel = 0`、0 亮度）、空字符串及数组/列表复合类型（Type 10 数组、Type 11 字符串列表、Type 12 整数列表，如 `key_battery_setting_status`）的丢包与超时未确认问题。\n- **找手表（Find My Watch）手表端停止事件双向同步**：在 `/w_apps_find_my_watch` 路径中补齐对手表端手动停止响铃（`fmw-finishalert-req`）的监听与应答响应（`fmw-finishalert-rsp`），手表端点击停止后手机概览端即时同步重置“找手表”状态，不再永久停留于“停止响铃”；同时补齐 `fmw-stopalert-rsp` 与 `fmw-startalert-rsp` 状态确认。\n- **验证边界**：443 项 JVM 单元测试、24 项脚本测试、1,131 项双语资源检查全部通过；Spotless 格式校验、Lint 静态分析及 Release 签名构建全部通过。上述协议修复已完成静态对照与自动化回归，尚待 Watch 7 Ultra 真机验证各开关显式关闭后的回包确认，不代表所有型号与固件均已验证。\n\n## 0.0.25\n\n- **Samsung Health 能力协商与同步握手**：针对 Galaxy Watch6 日志中能力协商未被应答、健康同步等待超时的情况，实现 `/samsung_health/capabi"
+  "sha256": "28a9c0f26bea0a7d49023d2141e64dbe85e2041014e503b6134f5056bead8e44",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1048c00fbc44f8967c4ab2e3ea2bc1d05944bf97/galaxy-watch-manager-free-0.0.27.apk",
+  "notes": "## 0.0.27\n\n- **修复抬腕亮屏等设置开关不更新**：设置请求成功排队后立即更新概览与设置页的开关状态，并主动请求回读；忽略手机写入的 DataItem 自回声，避免将其当作手表确认。手表缺少回包时不再重复写入常规设置或弹出失败提示，真实回报仍会更新显示。电池保护与省电开关同步采用即时显示。\n- **补充 Watch6 血压校准启动路径**：保留 `/991` 的官方校准请求，并增加 Wear OS `/remote_intent/rpc` 远程打开手表官方健康监测器的路径；校准入口不再因明文握手尚未就绪而直接拦截。三轮袖带校准及测量继续由手表官方应用执行，无需手机版三星健康监测器。\n- **连接状态确认**：ECG/BP 激活请求进入发送队列后继续等待手表回包，不再仅凭请求排队成功就标记健康监测器已连接。\n- **验证范围**：452 项 JVM 单元测试、24 项发布脚本测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过，Android 设备测试编译通过；本轮未执行手机界面测试。Watch6 校准界面能否启动并完成完整流程，以及 Watch7 Ultra 开关的实际同步效果，仍需对应真机验证。\n\n## 0.0.26\n\n- **Google Wear DataMap 协议默认值线缆省略完整解码**：解决 Galaxy Watch 7 Ultra 及全系 Wear OS 手表在非三星手机上“抬腕亮屏”（`wake_on_wrist_raised`）等快捷开关点击下发后，UI 无法收到关闭反馈、开关始终常亮的问题。根据 Wear OS 官方 Protobuf nano 规范，当标量值等于默认值（`false`、`0`、`0L`、`\"\"`）时，wire 层会省略传输字段及空负载对象；重构 `DataMapDecoder`，严格依据 `hqc.type` 类型标签派发并补齐默认值，系统性修复 17 项布尔设置（AOD、触摸唤醒、旋转表圈唤醒、勿扰同步、手势等关闭回包）、整型零值（15 秒屏幕超时 `intSelectedItem = 0`、左手佩戴 `intLevel = 0`、0 亮度）、空字符串及数组/列表复合类型（Type 10 数组、Type 11 字符串列表、Type 12 整数列表，如 `key_battery"
 }
