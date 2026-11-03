@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.24",
-  "version_code": 24,
-  "published_at": "2026-11-03T01:03:21Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.24",
-  "apk_name": "galaxy-watch-manager-free-0.0.24.apk",
-  "apk_size": 22885796,
-  "sha256": "96ed459c11f8d1a2cf1bf2f49b8013b5d00eb976429ff256082bcd00b71430e3",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/64c607e9a4bbaec0ed783c5360d3249b2d3b85bf/galaxy-watch-manager-free-0.0.24.apk",
-  "notes": "## 0.0.24\n\n- **解耦接收与连接生命周期**：为当前 WCS 会话引入有界异步接收队列 `SessionReceiveQueue`（容量 64 帧 / 8 MiB），将协议封包解析、Protobuf 反序列化与健康数据落盘移出 `WatchController` 全局监视器，彻底消除大包接收与控制器生命周期管理（重连/停止/换表）之间的监视器争用与反向等待；入队与执行均受请求代次（generation）与活动状态约束，断开或切换设备立即废弃过期待发包，防止过时会话污染新设备状态。\n- **页面状态投影与 Compose 重组隔离**：将跨域单体 `WatchState` 分解为按页面隔离的状态投影（`WatchPage.DASHBOARD`、`HEALTH`、`NOTIFICATIONS`、`SETTINGS`、`WATCH_FACE`）与刷新专用状态（`RefreshActionState`）；通过 `map { page.projection(it) }.distinctUntilChanged()` 隔离状态变化，步数、心率等后台健康数据同步不再引发概览、设置或根容器的不必要重组。\n- **健康数据归一化与持久化效率提升**：`HealthRecordStore` 引入单次遍历字段归一化（`normalizedIdentity`），消除 `merge` 与 `replaceTodaySteps` 中对已归一化记录的二次 JSON 序列化与解析往返，大幅降低大批次同步 CPU 开销；在健康数据入队、解码、提交及确认全链路严格执行 `isActive()` 校验，维持 Durable-before-ACK 事务完整性。\n- **验证边界**：417 项 JVM 单元测试、24 项脚本测试和 1,130 项双语资源检查通过；Spotless、Lint 与 Release 构建通过。\n\n## 0.0.23\n\n- **血压校准恢复为手表端直连**：撤销 0.0.22 将校准转交给手机版三星健康监测器的路线。WatchFree 重新通过现有 WCS `/991` 的 `measuring/do_calibration` 直接呼起手表 `BpMainActivity` / `BpCalibrationActivity`，三轮袖带采样、个人特征合并、`shm-bp"
+  "version_name": "0.0.25",
+  "version_code": 25,
+  "published_at": "2026-11-03T03:29:28Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.25",
+  "apk_name": "galaxy-watch-manager-free-0.0.25.apk",
+  "apk_size": 22902180,
+  "sha256": "d36c3074c798afcbb9438dc35ed9f62b0e24adc3996038ab6fab37bb267b863d",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/3ae2e0a3569b72c086b480f045f3d8976953850d/galaxy-watch-manager-free-0.0.25.apk",
+  "notes": "## 0.0.25\n\n- **Samsung Health 能力协商与同步握手**：针对 Galaxy Watch6 日志中能力协商未被应答、健康同步等待超时的情况，实现 `/samsung_health/capability` 协议处理。收到 `REQUEST_CAPABILITY` 后，以 `RESPONSE_CAPABILITY`（协议版本 4.51 / SHealth 6270000 / 消息版本 5.03）响应，补齐静态分析中手表建立 `HealthNode` 和继续处理排队数据请求所需的协商步骤。\n- **Samsung Health Monitor 直连握手与血压设置**：通过现有 WCS 链路与手表官方三星健康监测器（SHM）通信，识别 `/994c` 的 disable 控制帧及业务数据帧作为传输握手确认；应答手表发起的 ECG `information` 请求；血压设置入口可向 `/991` 发送 `terms_and_condition` 确认信令，继续使用手表端校准与测量流程。\n- **验证边界**：435 项 JVM 单元测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过；正式 APK 由发布工作流签名和校验。上述协议修复已完成静态对照和自动化回归，尚待 Watch6 真机验证数据同步、ECG/BP 激活及三轮袖带校准，不代表所有型号和固件均已验证。\n\n## 0.0.24\n\n- **解耦接收与连接生命周期**：为当前 WCS 会话引入有界异步接收队列 `SessionReceiveQueue`（容量 64 帧 / 8 MiB），将协议封包解析、Protobuf 反序列化与健康数据落盘移出 `WatchController` 全局监视器，彻底消除大包接收与控制器生命周期管理（重连/停止/换表）之间的监视器争用与反向等待；入队与执行均受请求代次（generation）与活动状态约束，断开或切换设备立即废弃过期待发包，防止过时会话污染新设备状态。\n- **页面状态投影与 Compose 重组隔离**：将跨域单体 `WatchState` 分解为按页面隔离的状态投影（`WatchPage.DASHBOARD`、`HEALTH`、`NOTIFICATIONS`、`SETTINGS`、`WATCH_FACE`）与"
 }
