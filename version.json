@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.25",
-  "version_code": 25,
-  "published_at": "2026-11-03T03:29:28Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.25",
-  "apk_name": "galaxy-watch-manager-free-0.0.25.apk",
+  "version_name": "0.0.26",
+  "version_code": 26,
+  "published_at": "2026-11-03T05:04:40Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.26",
+  "apk_name": "galaxy-watch-manager-free-0.0.26.apk",
   "apk_size": 22902180,
-  "sha256": "d36c3074c798afcbb9438dc35ed9f62b0e24adc3996038ab6fab37bb267b863d",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/3ae2e0a3569b72c086b480f045f3d8976953850d/galaxy-watch-manager-free-0.0.25.apk",
-  "notes": "## 0.0.25\n\n- **Samsung Health 能力协商与同步握手**：针对 Galaxy Watch6 日志中能力协商未被应答、健康同步等待超时的情况，实现 `/samsung_health/capability` 协议处理。收到 `REQUEST_CAPABILITY` 后，以 `RESPONSE_CAPABILITY`（协议版本 4.51 / SHealth 6270000 / 消息版本 5.03）响应，补齐静态分析中手表建立 `HealthNode` 和继续处理排队数据请求所需的协商步骤。\n- **Samsung Health Monitor 直连握手与血压设置**：通过现有 WCS 链路与手表官方三星健康监测器（SHM）通信，识别 `/994c` 的 disable 控制帧及业务数据帧作为传输握手确认；应答手表发起的 ECG `information` 请求；血压设置入口可向 `/991` 发送 `terms_and_condition` 确认信令，继续使用手表端校准与测量流程。\n- **验证边界**：435 项 JVM 单元测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过；正式 APK 由发布工作流签名和校验。上述协议修复已完成静态对照和自动化回归，尚待 Watch6 真机验证数据同步、ECG/BP 激活及三轮袖带校准，不代表所有型号和固件均已验证。\n\n## 0.0.24\n\n- **解耦接收与连接生命周期**：为当前 WCS 会话引入有界异步接收队列 `SessionReceiveQueue`（容量 64 帧 / 8 MiB），将协议封包解析、Protobuf 反序列化与健康数据落盘移出 `WatchController` 全局监视器，彻底消除大包接收与控制器生命周期管理（重连/停止/换表）之间的监视器争用与反向等待；入队与执行均受请求代次（generation）与活动状态约束，断开或切换设备立即废弃过期待发包，防止过时会话污染新设备状态。\n- **页面状态投影与 Compose 重组隔离**：将跨域单体 `WatchState` 分解为按页面隔离的状态投影（`WatchPage.DASHBOARD`、`HEALTH`、`NOTIFICATIONS`、`SETTINGS`、`WATCH_FACE`）与"
+  "sha256": "72e5439cf12075fc1cd5558642e5a3ceb18b322e2d233d223b3ff2ef3a30ce9e",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/5000c116329603b991a079604d062bc9d3f22ff1/galaxy-watch-manager-free-0.0.26.apk",
+  "notes": "## 0.0.26\n\n- **Google Wear DataMap 协议默认值线缆省略完整解码**：解决 Galaxy Watch 7 Ultra 及全系 Wear OS 手表在非三星手机上“抬腕亮屏”（`wake_on_wrist_raised`）等快捷开关点击下发后，UI 无法收到关闭反馈、开关始终常亮的问题。根据 Wear OS 官方 Protobuf nano 规范，当标量值等于默认值（`false`、`0`、`0L`、`\"\"`）时，wire 层会省略传输字段及空负载对象；重构 `DataMapDecoder`，严格依据 `hqc.type` 类型标签派发并补齐默认值，系统性修复 17 项布尔设置（AOD、触摸唤醒、旋转表圈唤醒、勿扰同步、手势等关闭回包）、整型零值（15 秒屏幕超时 `intSelectedItem = 0`、左手佩戴 `intLevel = 0`、0 亮度）、空字符串及数组/列表复合类型（Type 10 数组、Type 11 字符串列表、Type 12 整数列表，如 `key_battery_setting_status`）的丢包与超时未确认问题。\n- **找手表（Find My Watch）手表端停止事件双向同步**：在 `/w_apps_find_my_watch` 路径中补齐对手表端手动停止响铃（`fmw-finishalert-req`）的监听与应答响应（`fmw-finishalert-rsp`），手表端点击停止后手机概览端即时同步重置“找手表”状态，不再永久停留于“停止响铃”；同时补齐 `fmw-stopalert-rsp` 与 `fmw-startalert-rsp` 状态确认。\n- **验证边界**：446 项 JVM 单元测试、24 项脚本测试、1,131 项双语资源检查全部通过；Spotless 格式校验、Lint 静态分析及 Release 签名构建全部通过。\n\n## 0.0.25\n\n- **Samsung Health 能力协商与同步握手**：针对 Galaxy Watch6 日志中能力协商未被应答、健康同步等待超时的情况，实现 `/samsung_health/capability` 协议处理。收到 `REQUEST_CAPABILITY` 后，以 `RESPONSE_CAPABILITY`（协议版本 4.51"
 }
