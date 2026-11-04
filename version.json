@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.28",
-  "version_code": 28,
-  "published_at": "2026-11-03T18:00:42Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.28",
-  "apk_name": "galaxy-watch-manager-free-0.0.28.apk",
-  "apk_size": 22902180,
-  "sha256": "975e497066b3e10a1de491c065b0eaaa25856a7852f4a1c36fd96af55c7faf01",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f6ec869aa6036ba7da0adcca5abf475a11fe265a/galaxy-watch-manager-free-0.0.28.apk",
-  "notes": "## 0.0.28\n\n- **代码整理**：精简协议、健康数据、连接控制及界面中的重复注释与装饰性分隔，统一 Kotlin 格式，清理媒体查询入口遗留的同步注解。\n- **实测设备与验证边界**：更新荣耀 Magic 8 Pro + Galaxy Watch 7 Ultra、一加 13 Pro + Galaxy Watch 6 两组测试设备；区分用户反馈、静态分析与待验收功能，不再把未确认的系统版本或 Watch6 校准结果写成已验证。\n- **协议文档**：补充设置即时反馈、回读及手机自回声处理说明，并按当前实现记录血压远程 Intent 的组件与字段。Watch6 校准启动和完整三轮袖带流程，以及 Watch7 Ultra 最新开关修复效果，仍待真机验证。\n- **验证范围**：452 项 JVM 单元测试、24 项脚本测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过；Lint 为 0 错误、57 警告，Android 设备测试编译通过。本轮未执行真机界面或手表功能测试。\n\n## 0.0.27\n\n- **修复抬腕亮屏等设置开关不更新**：设置请求成功排队后立即更新概览与设置页的开关状态，并主动请求回读；忽略手机写入的 DataItem 自回声，避免将其当作手表确认。手表缺少回包时不再重复写入常规设置或弹出失败提示，真实回报仍会更新显示。电池保护与省电开关同步采用即时显示。\n- **补充 Watch6 血压校准启动路径**：保留 `/991` 的官方校准请求，并增加 Wear OS `/remote_intent/rpc` 远程打开手表官方健康监测器的路径；校准入口不再因明文握手尚未就绪而直接拦截。三轮袖带校准及测量继续由手表官方应用执行，无需手机版三星健康监测器。\n- **连接状态确认**：ECG/BP 激活请求进入发送队列后继续等待手表回包，不再仅凭请求排队成功就标记健康监测器已连接。\n- **验证范围**：452 项 JVM 单元测试、24 项发布脚本测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过，Android 设备测试编译通过；本轮未执行手机界面测试。Watch6 校准界面能否启动并完成完整流程，以及 Watch7 Ultra 开关的实际同步效果，仍需对应真机验证。\n\n"
+  "version_name": "0.0.29",
+  "version_code": 29,
+  "published_at": "2026-11-04T04:28:41Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.29",
+  "apk_name": "galaxy-watch-manager-free-0.0.29.apk",
+  "apk_size": 22930852,
+  "sha256": "eedb502306279c27ec3a0588f151dcccdc6ea286573a31d644c9ee05d736671b",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/7756631734a2daf6ef5423b77a6a4d71a8f82263/galaxy-watch-manager-free-0.0.29.apk",
+  "notes": "## 0.0.29\n\n- **血压校准启动修复**：移除校准和测量入口并发发送的 `/remote_intent/rpc`，统一通过现有 WCS `/991` 与手表官方健康监测器通信，避免远程 Intent 拉起根 Activity 与血压 Activity 冲突。\n- **手机三轮袖带校准向导**：新增准备、手表采样、手机录入真实袖带读数、逐轮提交和完成提示。第三轮完成后请求手表官方算法合并并保存校准；提供取消与失败重试，无需安装手机版三星健康监测器。\n- **校准状态回查与文档**：收到手表合并成功回复后刷新校准状态与血压记录；更新中英文操作说明、协议时序和验证边界。\n- **验证边界**：453 项 JVM 单元测试、24 项脚本测试、1,154 项双语资源检查、Spotless、Lint 及 Release 构建通过，Android 设备测试编译通过；协议测试覆盖三轮完成、取消及不发送远程 Intent。本轮未执行真机界面或手表校准测试，Watch6 与 Watch7 Ultra 的启动、完整三轮校准和结果回读仍需实测。\n\n## 0.0.28\n\n- **代码整理**：精简协议、健康数据、连接控制及界面中的重复注释与装饰性分隔，统一 Kotlin 格式，清理媒体查询入口遗留的同步注解。\n- **实测设备与验证边界**：更新荣耀 Magic 8 Pro + Galaxy Watch 7 Ultra、一加 13 Pro + Galaxy Watch 6 两组测试设备；区分用户反馈、静态分析与待验收功能，不再把未确认的系统版本或 Watch6 校准结果写成已验证。\n- **协议文档**：补充设置即时反馈、回读及手机自回声处理说明，并按当前实现记录血压远程 Intent 的组件与字段。Watch6 校准启动和完整三轮袖带流程，以及 Watch7 Ultra 最新开关修复效果，仍待真机验证。\n- **验证范围**：452 项 JVM 单元测试、24 项脚本测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过；Lint 为 0 错误、57 警告，Android 设备测试编译通过。本轮未执行真机界面或手表功能测试。\n\n## 0.0.27\n\n- **修复抬腕亮屏等设置开关不更新**：设置请求成功排队后立即更新概览与设置页的开关状态，并主"
 }
