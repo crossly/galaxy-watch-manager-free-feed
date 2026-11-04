@@ -1,11 +1,11 @@
 {
-  "version_name": "0.0.29",
-  "version_code": 29,
-  "published_at": "2026-11-04T04:28:41Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.29",
-  "apk_name": "galaxy-watch-manager-free-0.0.29.apk",
-  "apk_size": 22930852,
-  "sha256": "eedb502306279c27ec3a0588f151dcccdc6ea286573a31d644c9ee05d736671b",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/7756631734a2daf6ef5423b77a6a4d71a8f82263/galaxy-watch-manager-free-0.0.29.apk",
-  "notes": "## 0.0.29\n\n- **血压校准启动修复**：移除校准和测量入口并发发送的 `/remote_intent/rpc`，统一通过现有 WCS `/991` 与手表官方健康监测器通信，避免远程 Intent 拉起根 Activity 与血压 Activity 冲突。\n- **手机三轮袖带校准向导**：新增准备、手表采样、手机录入真实袖带读数、逐轮提交和完成提示。第三轮完成后请求手表官方算法合并并保存校准；提供取消与失败重试，无需安装手机版三星健康监测器。\n- **校准状态回查与文档**：收到手表合并成功回复后刷新校准状态与血压记录；更新中英文操作说明、协议时序和验证边界。\n- **验证边界**：453 项 JVM 单元测试、24 项脚本测试、1,154 项双语资源检查、Spotless、Lint 及 Release 构建通过，Android 设备测试编译通过；协议测试覆盖三轮完成、取消及不发送远程 Intent。本轮未执行真机界面或手表校准测试，Watch6 与 Watch7 Ultra 的启动、完整三轮校准和结果回读仍需实测。\n\n## 0.0.28\n\n- **代码整理**：精简协议、健康数据、连接控制及界面中的重复注释与装饰性分隔，统一 Kotlin 格式，清理媒体查询入口遗留的同步注解。\n- **实测设备与验证边界**：更新荣耀 Magic 8 Pro + Galaxy Watch 7 Ultra、一加 13 Pro + Galaxy Watch 6 两组测试设备；区分用户反馈、静态分析与待验收功能，不再把未确认的系统版本或 Watch6 校准结果写成已验证。\n- **协议文档**：补充设置即时反馈、回读及手机自回声处理说明，并按当前实现记录血压远程 Intent 的组件与字段。Watch6 校准启动和完整三轮袖带流程，以及 Watch7 Ultra 最新开关修复效果，仍待真机验证。\n- **验证范围**：452 项 JVM 单元测试、24 项脚本测试、1,131 项双语资源检查、Spotless、Lint 及 Release 构建通过；Lint 为 0 错误、57 警告，Android 设备测试编译通过。本轮未执行真机界面或手表功能测试。\n\n## 0.0.27\n\n- **修复抬腕亮屏等设置开关不更新**：设置请求成功排队后立即更新概览与设置页的开关状态，并主"
+  "version_name": "0.0.30",
+  "version_code": 30,
+  "published_at": "2026-11-04T10:06:36Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.30",
+  "apk_name": "galaxy-watch-manager-free-0.0.30.apk",
+  "apk_size": 22959524,
+  "sha256": "3dbf536997e4fa48aaef6420aeee887a0fd8b3b16efb568649a78bfa0a1c7855",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/11faa9a038fb82c4a43216e97d63162a38018226/galaxy-watch-manager-free-0.0.30.apk",
+  "notes": "## 0.0.30\n\n- **微信运动步数同步**：新增设置页「微信运动步数同步」，可随时开启或关闭。开启后由前台服务运行本地 BLE 虚拟计步外设，遵循腾讯微信硬件平台开放协议（服务 `0xFEE7`、计步 `0xFEA1`、目标步数 `0xFEA2`、设备 MAC `0xFEC9`），把本机收到的今日手表步数、距离、卡路里实时推送给已订阅的微信客户端。\n- **设备名与系统适配**：广播设备名固定为「你的手表」；Android 不允许单次广播自定义名称，因此开启时暂存并切换手机蓝牙名称，关闭同步或退出服务时自动还原，用户自行改过的名称不会被覆盖。界面展示运行状态、虚拟 MAC、当前同步步数与已连接客户端数量，并提供微信「数据来源」绑定指引。\n- **验证边界**：460 项 JVM 单元测试（新增 7 项协议编解码与 MAC 校验用例）、24 项发布脚本测试、1,179 项双语资源检查、Spotless、Lint 及 Release 构建通过。本轮未执行微信客户端绑定、刷新与多机型 BLE 广播的真机测试，实际同步效果等待真机验收。\n\n## 0.0.29\n\n- **血压校准启动修复**：移除校准和测量入口并发发送的 `/remote_intent/rpc`，统一通过现有 WCS `/991` 与手表官方健康监测器通信，避免远程 Intent 拉起根 Activity 与血压 Activity 冲突。\n- **手机三轮袖带校准向导**：新增准备、手表采样、手机录入真实袖带读数、逐轮提交和完成提示。第三轮完成后请求手表官方算法合并并保存校准；提供取消与失败重试，无需安装手机版三星健康监测器。\n- **校准状态回查与文档**：收到手表合并成功回复后刷新校准状态与血压记录；更新中英文操作说明、协议时序和验证边界。\n- **验证边界**：453 项 JVM 单元测试、24 项脚本测试、1,154 项双语资源检查、Spotless、Lint 及 Release 构建通过，Android 设备测试编译通过；协议测试覆盖三轮完成、取消及不发送远程 Intent。本轮未执行真机界面或手表校准测试，Watch6 与 Watch7 Ultra 的启动、完整三轮校准和结果回读仍需实测。\n- **发布后真机验证（2026-11-04）**：用户确认血压校准问题已完全解决。Galaxy W"
 }
