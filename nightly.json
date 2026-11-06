@@ -1,12 +1,12 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.33.003",
-  "version_code": 33003,
-  "published_at": "2026-11-06T11:22:13Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.33.003",
-  "apk_name": "galaxy-watch-manager-free-0.0.33.003.apk",
+  "version_name": "0.0.33.004",
+  "version_code": 33004,
+  "published_at": "2026-11-06T12:25:59Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.33.004",
+  "apk_name": "galaxy-watch-manager-free-0.0.33.004.apk",
   "apk_size": 23168420,
-  "sha256": "a1e1e2508dc49afbebb1f36f3b954cb4f3ebe9ee9e6a765d0899780493a74a2f",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/3cdc1ce1c002ee1311a2639d5ffe515513dce9bc/galaxy-watch-manager-free-0.0.33.003.apk",
-  "notes": "## 0.0.33.003 Nightly\n\n- **修正改名未发送的断点**：保留启动恢复及空闲时收到的手表名称条目，按原始 URI 和 DataMap 直接修改名称后回写；已有模板时不再等待可能被去重的重复网络回传。\n- **重连与节点校验**：同一手表自动重连时保留名称模板，换节点时拒绝旧模板；DataItem URI 的 owner 不再改写已配对的手表节点，其他节点的同路径条目不能作为模板或确认。\n- **区分失败阶段**：未取得原始条目时明确提示“尚未发送改名”，已发送但没有匹配回读时提示手表未确认，便于真机定位断点。\n- **验证与测试范围**：551 项 JVM 测试（名称同步 21 项）、43 项脚本测试、1340 项双语资源检查、Spotless、Lint 与 Release 构建通过，Android 测试源码编译通过。版本为 `0.0.33.003`（versionCode `33003`），沿用正式签名；此前两个 Nightly 均收到真机未改名反馈，本版仍需验证手表设置中的名称变化、断线重连及重启后的持久化。\n\n## 0.0.33.002 Nightly\n\n- **修正手表名称写入 URI**：按官方读改写方式保留名称 DataItem 的完整原始 URI，不再把条目所属节点替换成手机节点；保留原有元数据，仅修改名称与手机来源，帧的发送节点仍使用手机身份。\n- **确认与重连**：同一路径但不同 URI 的回包不能确认改名；缺少节点或路径不符的条目不会用于写入，每次改名和重连重新读取 URI，继续保留旧名称回包和手机自回声保护。\n- **验证与测试范围**：新增 4 项 URI 回归测试，修复前均失败、修复后通过；547 项 JVM 测试、43 项脚本测试、1339 项双语资源检查、Spotless、Lint 与 Release 构建通过，Android 测试源码编译通过。版本为 `0.0.33.002`（versionCode `33002`），沿用正式签名；手表设置中的名称变化及断线重连后的持久化仍待本版真机测试。\n\n## 0.0.33.001 Nightly\n\n- **修复手表重命名同步**：按官方读改写流程先读取名称条目，保留原有元数据，仅更新名称与手机来源，再写入并主动回读。\n- **确认与旧回包保护**：只有写入后的手表回读匹配"
+  "sha256": "48f6ea36a9059f7f01deae1d752fc3872118255a126bf072571013a7e60bcd3e",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/789ff1c313bb6298282105ed4469049142da6330/galaxy-watch-manager-free-0.0.33.004.apk",
+  "notes": "## 0.0.33.004 Nightly\n\n- **修正改名后的提示**：改名请求已提交但 4 秒内没有匹配回读时，提示“改名请求已提交，请在手表上查看名称”，不再误导用户重试；只有收到匹配回读才提示改名成功。未取得名称模板、尚未发送和发送失败仍分别反馈。\n- **保留改名同步行为**：沿用上一版已获用户真机确认的名称写入路径，保留原始 URI、目标名称和手机自回声的确认校验。\n- **验证与验收范围**：552 项 JVM 测试（名称同步 22 项）、43 项脚本测试、1340 项双语资源检查、Spotless、Lint 与 Release 构建通过，Android 测试源码编译通过。版本为 `0.0.33.004`（versionCode `33004`），沿用正式签名；本版供真机验收 Toast 提示及改名后断线重连、手表重启的持久化。\n\n## 0.0.33.003 Nightly\n\n- **修正改名未发送的断点**：保留启动恢复及空闲时收到的手表名称条目，按原始 URI 和 DataMap 直接修改名称后回写；已有模板时不再等待可能被去重的重复网络回传。\n- **重连与节点校验**：同一手表自动重连时保留名称模板，换节点时拒绝旧模板；DataItem URI 的 owner 不再改写已配对的手表节点，其他节点的同路径条目不能作为模板或确认。\n- **区分失败阶段**：未取得原始条目时明确提示“尚未发送改名”，已发送但没有匹配回读时提示手表未确认，便于真机定位断点。\n- **验证与测试范围**：551 项 JVM 测试（名称同步 21 项）、43 项脚本测试、1340 项双语资源检查、Spotless、Lint 与 Release 构建通过，Android 测试源码编译通过。版本为 `0.0.33.003`（versionCode `33003`），沿用正式签名；此前两个 Nightly 均收到真机未改名反馈，本版仍需验证手表设置中的名称变化、断线重连及重启后的持久化。\n\n## 0.0.33.002 Nightly\n\n- **修正手表名称写入 URI**：按官方读改写方式保留名称 DataItem 的完整原始 URI，不再把条目所属节点替换成手机节点；保留原有元数据，仅修改名称与手机来源，帧的发送节点仍使用手机身份。\n- **确认与重连**：同一路径但不同 "
 }
