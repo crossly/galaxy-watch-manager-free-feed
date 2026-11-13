@@ -1,12 +1,12 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.35.002",
-  "version_code": 35002,
-  "published_at": "2026-11-12T16:33:13Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.35.002",
-  "apk_name": "galaxy-watch-manager-free-0.0.35.002.apk",
-  "apk_size": 23246244,
-  "sha256": "37f6c00983a2917f3f6112dee905d32fa887d731e41cd8f20a942ddd06fc8a19",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/cf18b5a707adc3765d1294e00857fc76a14f9902/galaxy-watch-manager-free-0.0.35.002.apk",
-  "notes": "## 0.0.35.002 Nightly\n\n- **睡眠评分对齐**：依据 REA 对 `libsleepscore.so` 1.4.24 的核查，将本机评分替换为该版本的夜间总分算法；同步总睡眠时长、安稳度、深睡、REM 与入睡耗时五项权重和曲线，逐项截断后将总分限制在 1–99。手表评分仍优先显示，缺测或分期不完整时不生成本机评分，也不回写手表。\n- **评分详情**：原「睡眠周期」因子改为「入睡耗时」，更新入睡后清醒占比与中英文说明；明确区分本机计算和手表评分。\n- **健康导出 v3**：增加 `computed_score_algorithm`，同步新评分范围、来源枚举、manifest、JSON Schema 和回归测试；保留手表原始评分、全部留存历史、手动小睡和本机分析缓存。旧 v2 的 `computed_v1` 与新算法分数应分开比较。\n- **验证与适用范围**：346 组合成输入的原库 ARM64 指令模拟与 Kotlin 总分及五项贡献全部一致；632 项 JVM 测试、43 项脚本测试、1361 项双语资源检查、Spotless、Lint 和 Release 构建通过。对齐范围限于已核查的 1.4.24 夜间路径，不保证其他官方版本或手表评分相同。\n- **发布与验收边界**：版本 `0.0.35.002`（versionCode `35002`），沿用正式签名并作为 Nightly 预发布；稳定通道继续保留 `0.0.35`。评分界面、手机保存/分享、覆盖升级及重启持久化尚待真机验收，宿主与 Android 数学库的极端浮点边界尚未实机验证。\n\n## 0.0.35.001 Nightly\n\n- **睡眠评分**：无手表评分且已有有效睡眠分期时，按总睡眠时长、安稳度、深睡、REM 和近似睡眠周期五项指标计算本机评分；优先显示手表提供的评分，无分期或无有效睡眠时不生成本机分数。采用独立、公开的权重与公式，结果不保证与三星健康官方总分一致，也不回写手表。\n- **评分可视化**：睡眠详情新增圆形评分环与等级；本机评分展示五项因子进度条及对应时长、清醒占比或周期数，明确区分「本机计算」与「手表评分」，同步提供中英文文案。\n- **健康导出**：睡眠会话增加 `computed_score` 和 `score_source`，保留手表原始 `sc"
+  "version_name": "0.0.35.003",
+  "version_code": 35003,
+  "published_at": "2026-11-13T03:40:31Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.35.003",
+  "apk_name": "galaxy-watch-manager-free-0.0.35.003.apk",
+  "apk_size": 23250340,
+  "sha256": "050c4f96ddc3a0ad52bd3fee3c588f62cd28cbef92950e4d19f1d701f8394250",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/dbc7de29354821714b62b09e9bef722646e8e9c2/galaxy-watch-manager-free-0.0.35.003.apk",
+  "notes": "## 0.0.35.003 Nightly\n\n- **卡片与主题**：统一常用圆角及分组卡片层级；概览和健康网格按窗口宽度与字体大小切换单列/双列，宽窗口限制最大内容宽度。自动重排保留已有顺序、隐藏状态及半宽/整行偏好，健康摘要在空间不足时纵向排布。\n- **图表无障碍**：心率、压力、通用健康指标、血管负荷和心率周范围图增加读屏选点操作与当前读数描述，支持键盘左右、Home/End、Enter/空格和 Escape；无测量日期不作为可选读数，原有触摸选点与纵向滚动继续保留。\n- **自适应面板**：步数目标在宽窗口使用居中对话框，小窗口继续使用底部面板；切换窗口及状态恢复保留未提交草稿，明确保存后才应用目标。详情面板统一最大宽度。\n- **预览与验证**：增加合成数据的多尺寸、明暗主题、中英文 Preview，以及网格重排、图表选点和目标草稿恢复的 UI 用例。本地 632 项 JVM 测试、43 项脚本测试、1369 项双语资源检查、Spotless、Lint 和 Release 构建通过，Android UI 测试源码编译通过。\n- **发布与验收边界**：版本 `0.0.35.003`（versionCode `35003`），沿用正式签名并作为 Nightly 预发布；健康导出 v3 的数据结构、来源和完整留存范围未变。当前无可用 Android 设备，未执行 UI 测试或实际渲染 Preview，视觉效果、TalkBack、预测返回、覆盖升级及重启持久化仍待真机验收；Material 3 1.5/Expressive 升级、历史双栏与共享转场留待后续独立验证。\n\n## 0.0.35.002 Nightly\n\n- **睡眠评分对齐**：依据 REA 对 `libsleepscore.so` 1.4.24 的核查，将本机评分替换为该版本的夜间总分算法；同步总睡眠时长、安稳度、深睡、REM 与入睡耗时五项权重和曲线，逐项截断后将总分限制在 1–99。手表评分仍优先显示，缺测或分期不完整时不生成本机评分，也不回写手表。\n- **评分详情**：原「睡眠周期」因子改为「入睡耗时」，更新入睡后清醒占比与中英文说明；明确区分本机计算和手表评分。\n- **健康导出 v3**：增加 `computed_score_algorithm`，同步新评分范围、来源枚举、manife"
 }
