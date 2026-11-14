@@ -1,12 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.35",
-  "version_code": 35000,
-  "published_at": "2026-11-09T16:24:03Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.35",
-  "apk_name": "galaxy-watch-manager-free-0.0.35.apk",
-  "apk_size": 23225764,
-  "sha256": "7aef3574f6a48d632b4acc52279026d6531ac2b033505c316561955ac0c85e04",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/77a59a649bad9568746429bb99cfe11e5fe8e666/galaxy-watch-manager-free-0.0.35.apk",
-  "notes": "## 0.0.35\n\n- **血管负荷采集设置**：支持在「设置 → 健康测量」及健康页测量面板控制睡眠期间的血管负荷采集，两个入口按手表能力一致显示；沿用官方健康偏好，收到成功回执及匹配回读后确认，不修改引导状态或重置基线。\n- **连接引导与恢复**：先获取并保存待验证的手机身份，再引导释放官方连接，最后发起连接验证；重新打开可恢复进度，支持选择已改名手表，并分别处理权限缺失、蓝牙关闭、未配对和连接失败。\n- **健康导出 v2**：覆盖当前设备在手机中全部留存的可解析历史，补齐手动小睡、本机睡眠分析缓存、活动区间、楼层、血管负荷和采集设置；保留来源、修订、HRV 算法、运动父子关系及未知值，修正跨日日期和睡眠分期导出，并提供 schema、数量、时间范围与逐文件校验和。\n- **同步与状态可靠性**：集中连接、身份交接、健康同步、设置回读、刷新和更新安装等状态迁移；健康数据保存成功后才确认同步，保存失败或会话失效时不推进 ACK，保留失败重试与取消处理。\n- **自动查询与同步时间**：默认查询间隔由 5 分钟调整为 15 分钟，已保存的有效间隔继续保留；「最近同步」同时反映健康数据和有效设备回包，避免自动查询已接收但显示时间不变。查询间隔不改变手表传感器采样频率。\n- **更新下载镜像**：「关于与更新」可选择直连、`gh-proxy.com`、`ghproxy.net` 或 `ghfast.top`，同时用于更新检查和 APK 下载；切换时重启进行中的任务，继续校验包名、版本、大小、SHA-256 与签名证书。\n- **测试与升级**：汇总 `0.0.34.001` 至 `0.0.34.006` Nightly 的变更，用户反馈测试后发布正式版；沿用正式签名，版本 `0.0.35`（versionCode `35000`），稳定版与上述 Nightly 均可升级。此前本地 623 项 JVM 测试、43 项脚本测试、1352 项双语资源检查、Spotless、Lint 和 Release 构建通过，发布时再次执行构建门禁；Android 设备测试仅编译，用户反馈未逐项说明型号、流程和重启持久化范围，不据此扩大验收结论。导出包尚不能直接导入外部健康平台，镜像可用性取决于服务及网络。\n\n## 0.0.34.006 Nightly\n\n- **更新下载镜像**：在"
+  "version_name": "0.0.36",
+  "version_code": 36000,
+  "published_at": "2026-11-14T06:35:09Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.36",
+  "apk_name": "galaxy-watch-manager-free-0.0.36.apk",
+  "apk_size": 15709151,
+  "sha256": "9a555ddde25a2228d4cebf3a1b576c231b0656c322f8630282f28375c526d6e1",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f0872a35884b24d1660910de318688d2e356857f/galaxy-watch-manager-free-0.0.36.apk",
+  "notes": "## 0.0.36\n\n- **睡眠评分**：无手表评分且已有有效睡眠分期时，按总睡眠时长、安稳度、深睡、REM 与入睡耗时五项指标计算本机评分，并依据 `libsleepscore.so` 1.4.24 的夜间总分算法对齐权重与曲线；手表评分优先，缺测或分期不完整时不生成，也不回写手表。睡眠详情新增评分环、等级与五项因子说明，明确区分「本机计算」与「手表评分」。\n- **健康导出 v3**：睡眠会话增加 `computed_score`、`score_source` 与 `computed_score_algorithm`，同步 JSON Schema、来源枚举、manifest、数量与逐文件校验和；保留手表原始评分、全部留存历史、手动小睡和本机分析缓存。旧 v2 的 `computed_v1` 与新算法分数应分开比较。\n- **健康数据正确性**：同一指标的模块别名先选择最新整条修订再展开读数；统一八位日期、ISO 日期与毫秒时间戳解析，修复历史修订误归今天；楼层缺失保持未知、真实零值保留。DataItem 快照增加累计字节预算和来源完整性标记，旧快照保守迁移为全量同步。\n- **自适应界面与无障碍**：统一圆角与分组卡片层级；概览和健康网格按窗口宽度与字体大小切换单列/双列，详情面板限制最大宽度；步数目标在宽窗口使用居中对话框、小窗口使用底部面板并保留草稿。心率、压力、通用健康指标、血管负荷及心率周范围图增加读屏选点与键盘操作。\n- **隐私与设备显示**：普通错误和调试堆栈不再输出任意异常消息，睡眠分析日志去掉健康值及记录标识；补齐设置页设备名称、型号、同步与当前表盘状态；设备设置确认窗口从实际发包开始，过期请求与旧连接任务失效。\n- **公开产物与发布交付**：公开 APK/源码不再包含授权未确认的厂商睡眠运行时与官方表盘预览，改用带明确标记的原创示意图；每个表盘预设强制对应预览图，修复 `0.0.35.004` 的图片回归并恢复 43 张逐款预览。APK 同时提供完整对应源码与校验和，发布清单增加源码固定链接，发布队列与 Latest 处理保持幂等。\n- **测试与升级**：汇总 `0.0.35.001` 至 `0.0.35.005` Nightly 的变更；沿用正式签名，版本 `0.0.36`（versionCode `36000`），稳定版与上述 Ni",
+  "source_name": "galaxy-watch-manager-free-0.0.36-source.tar.gz",
+  "source_size": 1703821,
+  "source_sha256": "d24760e8eeaa17583e1cb81fc2a1d5c03a3d49040dbaae14082a1776d5473478",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f0872a35884b24d1660910de318688d2e356857f/galaxy-watch-manager-free-0.0.36-source.tar.gz"
 }
