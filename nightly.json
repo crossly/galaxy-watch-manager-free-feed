@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.36.002",
-  "version_code": 36002,
-  "published_at": "2026-11-14T14:13:18Z",
-  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.36.002",
-  "apk_name": "galaxy-watch-manager-free-0.0.36.002.apk",
+  "version_name": "0.0.36.003",
+  "version_code": 36003,
+  "published_at": "2026-11-14T14:55:14Z",
+  "page_url": "https://github.com/crossly/galaxy-watch-manager-free/releases/tag/v0.0.36.003",
+  "apk_name": "galaxy-watch-manager-free-0.0.36.003.apk",
   "apk_size": 19613148,
-  "sha256": "eeab8388c7780ac5b7c816d1372fe391b71bd08d6fdbc55ef1a86345996b01c2",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/061bde8220c0eb91f76a13ad2056345b7a8d35ca/galaxy-watch-manager-free-0.0.36.002.apk",
-  "notes": "## 0.0.36.002 Nightly\n\n- **通知按应用筛选**：「设置 → 应用 → 通知与下发 → 转发哪些应用」新增全部应用/仅所选应用两种模式，可按应用名称或包名搜索并勾选；所选模式未勾选任何应用时不转发通知，切回全部应用仍保留选择。模式与包名持久化，首次启动把旧非空允许列表迁移为仅所选模式，已保存的空选择不被旧值覆盖；应用列表合并桌面入口、已选和观察到通知的应用，Android 11+ 通过 launcher 查询声明枚举。筛选在手机端调用 Bridger 前生效，不撤回手表已有通知，手动测试通知不受影响。\n- **权限检查**：「设置 → 应用 → 权限检查」按 Android 版本展示附近设备、通知使用权、本应用通知、电池优化豁免、安装应用更新及 Android 8–9 相册写入的授权状态；点击请求授权或打开相应系统设置，返回时刷新，永久拒绝时引导到应用详情，并提供厂商后台/自启动设置入口。厂商后台限制无法可靠检测，不加“已授权”结论。\n- **协议与文档**：核对并修正 SSOT 6.4 为当前实际 Bridger 负载（`title_raw`/`text_raw`/`when` 等，包名与通知身份位于 URI）；同步 README 与进展记录。本轮未改变通知发送负载、健康数据、统计、留存或导出结构。\n- **验证与验收边界**：版本 `0.0.36.002`（versionCode `36002`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、687 项 JVM 测试（无失败、错误或跳过）、Lint（0 错误、139 警告）、Release 构建及 Android UI 测试编译通过，1401 项双语资源检查与 78 项脚本回归通过；新增四项 Compose 用例仅完成编译，尚未在设备执行。当前无可用 Android 设备，应用列表/长英文/大字号/明暗主题、系统授权与拒绝返回、筛选后的手表实际接收及重启持久化仍待真机验收。",
-  "source_name": "galaxy-watch-manager-free-0.0.36.002-source.tar.gz",
-  "source_size": 5637028,
-  "source_sha256": "52625d0c3a4d7295912cd6db80cd05c561b90ed60f4ffe293087401238777494",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/061bde8220c0eb91f76a13ad2056345b7a8d35ca/galaxy-watch-manager-free-0.0.36.002-source.tar.gz"
+  "sha256": "2dc57430b35284f704ec16df150f51ec06d0eaf23798a24d95a82c2d2b9dd5bc",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/0a1549c88032cde5788239858e000a14094f9ab4/galaxy-watch-manager-free-0.0.36.003.apk",
+  "notes": "## 0.0.36.003 Nightly\n\n- **血管负荷审查修复**：健康页打开「血管负荷」面板改为普通健康同步请求，不再触发零游标全量回填；手动刷新仍走血管负荷专用同步。\n- **导出语义对齐**：`vascular_load.json` 的 `band` 仅适用于 `type=measurement`，基线与重置行为 null，不再为基线原始 MAP 值计算相对负荷；同步 JSON Schema 枚举与导出文档。\n- **manifest 日期回退**：血管负荷数据集的 `local_date` 无直接字段时回退到 `tracking_local_date`，跨日记录按追踪日归属。\n- **回填重试**：血管负荷历史回填失败后每 30 分钟自动重试，最多 3 次；成功、停止同步或设备不支持时重置。\n- **清理死代码**：移除未使用的 `trackingMillis` 投影。\n- **验证与验收边界**：版本 `0.0.36.003`（versionCode `36003`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、687 项 JVM 测试（无失败、错误或跳过）、Lint（0 错误）、Release 构建与 78 项脚本回归通过。本轮无可用 Android 设备，血管负荷回填重试、面板普通同步入口及导出差异仍需真机验收。",
+  "source_name": "galaxy-watch-manager-free-0.0.36.003-source.tar.gz",
+  "source_size": 5638411,
+  "source_sha256": "b35165b33d3631cbc06464e4c6b8ae2816fe90ee34f45d64b19f6acaa11470ac",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/0a1549c88032cde5788239858e000a14094f9ab4/galaxy-watch-manager-free-0.0.36.003-source.tar.gz"
 }
