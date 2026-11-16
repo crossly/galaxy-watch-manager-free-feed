@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.37.005",
-  "version_code": 37005,
-  "published_at": "2026-11-16T06:16:14Z",
+  "version_name": "0.0.37.006",
+  "version_code": 37006,
+  "published_at": "2026-11-16T08:08:04Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.37.005.apk",
-  "apk_size": 19629532,
-  "sha256": "82c2db2750359d4826fcd9eb11012be752004e0bd6aa8ca5c976c5311ebd6d00",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f0a837d739e3582e90aeb6ae464bd2b1de1d529/galaxy-watch-manager-free-0.0.37.005.apk",
-  "notes": "## 0.0.37.005 Nightly\n\n- **健康检测器兼容身份恢复**：修复 `0.0.37.004` 上非三星手机的手表 Samsung Health Monitor 再次要求三星手机的问题。WCS `feature_exchange` 恢复既有兼容身份 `deviceName=\"Galaxy S25 Ultra\"`、`modelNumber=\"SM-S938U1\"`、`vender=\"samsung\"`、`isTablet=\"false\"`、`csc=\"XAA\"`；SHM 从 companion provider 的 `vendor` 读取该值，不满足判断时打开 `ErrorActivity(type=3)`。实际蓝牙名、屏幕像素、语言、时区、时间与默认短信包仍取运行环境，不写入健康记录或导出的手表型号。\n- **状态交换一致性**：手机→手表 `status_exchange` 的 `mcc=\"310\"`、`mnc=\"410\"`、`simCountry=\"us\"` 与既有 `SM-S938U1`/`XAA` 兼容身份保持一致，`devicePlatformVersion` 仅发送 `Build.VERSION.RELEASE` 首个点分段，其余字段按官方 `StatusExchangeMessage` 核对。手表端已解包应用中只有 companion `vendor` 被 SHM 读取，本项不改 ECG/BP 门槛，也不代表地区资格或医学功能已获验证。\n- **概览免打扰立即开关**：概览「勿扰同步」改为「免打扰」，点击直接写 `dnd_turn_on_now` 立即开/关手表免打扰；不再写只作为手表侧偏好、且手机端观察器未实现的 `sync_do_not_disturb/enabled`，避免点击无实际效果。\n- **设置页移除同步开关**：移除「同步手机勿扰模式」开关及其状态、文案。手机端 `ZEN_MODE` 观察器和手机→手表自动推送未实现，保留开关会误导；诊断设置中该原始路径的标签保留。\n- **发布与文档**：`scripts/release-notes.py` 新增 `--collect-nightlies`（按时间提取上一稳定线全部 Nightly）与 `--check-nightlies`（稳定版发布前校验 Nightly 章节覆盖",
-  "source_name": "galaxy-watch-manager-free-0.0.37.005-source.tar.gz",
-  "source_size": 5668053,
-  "source_sha256": "a4aedf79277801329f17f31f42ad267c24fe67d0a2d8dfd23f9005ac16774faf",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f0a837d739e3582e90aeb6ae464bd2b1de1d529/galaxy-watch-manager-free-0.0.37.005-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.37.006.apk",
+  "apk_size": 35034032,
+  "sha256": "93bfd13e67405e93dd0c27357937ee9a7ccb8610e28638d971830199514c48fe",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/96f7de8e0a2316129ac5fcfdc71f7944d1ce5f28/galaxy-watch-manager-free-0.0.37.006.apk",
+  "notes": "## 0.0.37.006 Nightly\n\n- **运动轨迹地图**：接入 MapLibre Native 与 OpenStreetMap 底图。展开运动先显示本地轨迹预览，点击「查看地图」进入全屏，可拖动、缩放和恢复全程视野，区分起终点、单点和无有效点；加载失败提供重试，渲染失败回退本地轮廓。坐标系尚未确认时明确提示可能偏移，不猜测地区转换、不改写原始坐标或运动汇总；国内底图速度待实测。\n- **运动详情排版**：地图下方整理为「距离与速度」「心率」「海拔变化」三组，窄屏与大字号使用单列；保留有效时长、消耗、步数/次数和例程子项，避免用一长串文字挤在地图下方。\n- **健康导出 v4**：增加 `workout_routes.json`，覆盖当前设备全部留存原始运动定位负载，保留父运动身份、来源/修订、点序、分段及未知坐标系。同步 schema、manifest 数量/覆盖、校验和与导出说明；不新增独立轨迹数据库，不以界面最近 40 条限制导出历史。\n- **勿扰协议修正**：针对 `0.0.37.005` 点击后仅手机有反应的反馈，按官方 Watch7 Plugin 的发送链保留手表所属 `dnd_turn_on_now` 原 URI 和完整 DataMap，再修改目标、来源、时间与时长；无模板先读取，不在手机节点新建精简条目。保留手表原策略，不实现手机勿扰自动同步。\n- **勿扰确认反馈**：概览等待期间显示「等待手表确认」并禁用重复点击；发送入队或手机自回声不再改变已确认开关。未取得原始条目提示尚未发送；写入后未回报则提示请求已提交、需在手表检查，断线取消待确认操作。\n- **验证与验收边界**：版本 `0.0.37.006`（versionCode `37006`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、747 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、143 警告）、Release 构建、Android 设备测试代码编译、1433 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查，MapLibre 四组 ABI 与两份新增许可证已核对，Compose 新用例只完成编译。当前无可用 Android 设备，未运行手机界面、地图实际渲染/拖动缩放/断网重试/道路对齐或手表执行；勿扰实际",
+  "source_name": "galaxy-watch-manager-free-0.0.37.006-source.tar.gz",
+  "source_size": 5696622,
+  "source_sha256": "68fc16af2cc4b6339c8a66da777f9bf6d63d250d6f04b57236c9cccfbe962fae",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/96f7de8e0a2316129ac5fcfdc71f7944d1ce5f28/galaxy-watch-manager-free-0.0.37.006-source.tar.gz"
 }
