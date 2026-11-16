@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.37.007",
-  "version_code": 37007,
-  "published_at": "2026-11-16T09:19:20Z",
+  "version_name": "0.0.37.008",
+  "version_code": 37008,
+  "published_at": "2026-11-16T13:08:42Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.37.007.apk",
-  "apk_size": 35038128,
-  "sha256": "466021429966cdd728b7cc823eb06edef183e56c9a0a808bc9829cc2147b2295",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/013d4d74b0e7835d3321825e7be043b67464a826/galaxy-watch-manager-free-0.0.37.007.apk",
-  "notes": "## 0.0.37.007 Nightly\n\n- **免打扰执行链二次修正**：修复 `0.0.37.006` 点击免打扰后手表仍无反应的问题。上一版写入 `longZenDurationEndtime=0L`（纪元零点），手表会把「直到手动关闭」误判为已过期；现按官方 `putDoNotDisturb` 语义写入 `booleanIsChecked`、`from=\"phone\"`、`time` 与 `intZenDuration=0`，并移除克隆条目中残留的 `longZenDurationEndtime`，避免旧定时结束时间立即生效。手机通知策略字段需要 `ACCESS_NOTIFICATION_POLICY`，本应用未声明，继续保留手表原策略。\n- **运动轨迹预览底图**：展开运动详情时的 176dp 轨迹预览加入 OpenStreetMap 栅格底图，按轨迹范围选择缩放级并拼合最多 2×2 瓦片后叠加轨迹与起终点；任一瓦片下载或解码失败自动回退本地轮廓，不阻塞详情显示。底图显示时在预览下方提供 OSM 署名，展开列表只请求预览所需瓦片。\n- **全屏地图关闭崩溃修复**：关闭全屏地图时 `MapView.onDestroy()` 会阻塞 UI 线程等待 GL 渲染线程退出并清理 EGL，与 TextureView surface 销毁形成竞态，导致整个应用退出。现在将销毁延后到当前组合帧提交后执行，先让视图脱离与 surface 释放，并继续取消旧瓦片请求、释放连接池和恢复全局 HTTP 客户端。\n- **验证与验收边界**：版本 `0.0.37.007`（versionCode `37007`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、752 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、143 警告）、Release 构建、Android 设备测试代码编译、1433 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。当前无可用 Android 设备，免打扰在手表上的实际开关、轨迹预览底图加载与拼接、关闭全屏地图后的进程存活均待真机验收。本轮不改变健康数据、采集设置、留存或导出结构（运动轨迹导出沿用 v4）。",
-  "source_name": "galaxy-watch-manager-free-0.0.37.007-source.tar.gz",
-  "source_size": 5703820,
-  "source_sha256": "edbbb902a243e6db1deb796239d5604f7b08910009390a6751e06816475c691f",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/013d4d74b0e7835d3321825e7be043b67464a826/galaxy-watch-manager-free-0.0.37.007-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.37.008.apk",
+  "apk_size": 35054512,
+  "sha256": "11ca1d1c7f54140430b8b542736598ec3adcfd51a65df2e60796e3b2f66d2442",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/47f910d961b2bb0e0094dd5e1ae860168483f71c/galaxy-watch-manager-free-0.0.37.008.apk",
+  "notes": "## 0.0.37.008 Nightly\n\n- **三星健康与健康监测器独立同步**：两个数据源现在各自维护同步状态，健康监测器握手失败不再阻塞三星健康数据读取，仅有健康监测器时也能独立同步心电、血压记录；两者都不可用时才报告健康同步失败。监测器同步请求会排队等待明文握手完成，发送、解析、保存与确认异常按通道隔离；健康页同步文案聚合两个来源（双成功、仅三星健康、仅健康监测器、部分成功、双失败），错误 Toast 按实际失败阶段提示，不再使用笼统或错误的提示。\n- **免打扰立即生效与持久化**：每次下发免打扰前先开启手表的「手机勿扰同步」偏好，再写目标状态；目标进入发送队列即按 `dndSubmitted ?: dndOn` 乐观显示并允许反向点击，不再长期停留在「未确认」。已提交目标按配对设备与手表节点单独持久化，断开重连后恢复显示，手机应用进程重启也不丢失；手表在线反馈到来时以手表状态覆盖。\n- **天地图底图与地图退出修复**：运动轨迹预览与全屏地图从 OpenStreetMap 切换为天地图矢量底图与中文注记，预览逐瓦片合成两层底图，MapLibre 样式按底图、注记、轨迹排序。修复关闭全屏地图时 `connectionPool.evictAll()` 在主线程执行引发的 `NetworkOnMainThreadException`：请求取消与连接池清理解耦到进程级 IO 协程，视图脱离后再执行 `MapView.onDestroy()`。\n- **验证与验收边界**：版本 `0.0.37.008`（versionCode `37008`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、774 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、143 警告）、Release 构建、1444 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。免打扰与天地图改动已在同签名预览上完成手机与手表实测（详见 `docs/OPTIMIZATION-PROGRESS.md`）；三星健康/健康监测器双源同步未做真机验证，其握手隔离、按通道完成与失败提示仅有 JVM 回归。本轮不改变健康数据模型、采集设置、留存或导出结构（导出沿用 v4）。",
+  "source_name": "galaxy-watch-manager-free-0.0.37.008-source.tar.gz",
+  "source_size": 5715439,
+  "source_sha256": "0c25b8332fad2f1665197c5e6daeffe8e18548cf1a7eb5e09a4688aa5e5cbc8d",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/47f910d961b2bb0e0094dd5e1ae860168483f71c/galaxy-watch-manager-free-0.0.37.008-source.tar.gz"
 }
