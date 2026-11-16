@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.37.003",
-  "version_code": 37003,
-  "published_at": "2026-11-16T01:23:10Z",
+  "version_name": "0.0.37.004",
+  "version_code": 37004,
+  "published_at": "2026-11-16T02:46:02Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.37.003.apk",
+  "apk_name": "galaxy-watch-manager-free-0.0.37.004.apk",
   "apk_size": 19629532,
-  "sha256": "835f8d25ace251de576ece388b7110381ee63626d3eb6a7007c5d87ccd8c9177",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f1fed4700ca2759dfe0513cf97d02ddc535021b/galaxy-watch-manager-free-0.0.37.003.apk",
-  "notes": "## 0.0.37.003 Nightly\n\n- **通知图标回执**：识别手表返回的 AckAsset，修复发送测试通知后出现「未知握手 inner fields=5」的误报；继续先发送图片资产、再发送引用该图片的通知。回执只证明资产通道收到确认，图标实际显示仍需手表验收。\n- **健康记录与睡眠**：睡眠、分期、楼层及运动模块别名统一选择最新整条修订；与手表睡眠重叠的手动补记不再重复累计，独立补记原文继续保留。血压和 ECG 按修订时间合并并保存 `update_time`，避免旧记录覆盖新值；本机睡眠分析完成后重新检查待分析数据，减少同步期间漏分析。\n- **连接与设置**：手机型号、厂商及平板标识取实际设备信息；连接达到 Ready 后不再被旧验证超时误判失败；省电模式发送失败时回滚显示值，身份交接如实返回持久化结果。修正 DataMap 浮点编码，按协议保留 Float/Double 原始位。\n- **隐私、更新与发布**：诊断信息补齐 IMEI、EID、设备和节点标识脱敏；更新页面指向公开下载仓库；签名脚本强制检查正式证书 SHA-256，并区分证书与公钥摘要，修复误拒绝正式签名的问题。CI 将随包 Markdown 资产视为代码变更，并修正电量协议说明中的路径与充电状态语义。\n- **界面与导出联动**：表盘页面恢复状态，补齐血压校准关闭按钮的无障碍描述与步数距离单位本地化。已核对健康快照、独立手动小睡和本机分析缓存、原始/标准化归档、schema 与 manifest；沿用 v3 和全部留存历史范围，血压/ECG 新增修订保留在原始记录及 `retained_cache.json`，不修改既有标准化字段。\n- **验证与验收边界**：版本 `0.0.37.003`（versionCode `37003`），沿用正式签名并作为 Nightly 预发布，包含未成功发布的 `0.0.37.002` 修复。Spotless、715 项 JVM 回归、Lint、Debug/Release 构建、Android 测试源码编译与 1411 项双语资源检查通过；脚本回归增加 5 项签名用例，发布时再次执行构建门禁。本轮未进行手机界面、保存/分享、覆盖安装、手表图标展示或重启持久化验收，远端发布与公开下载结果在发布后单独核验。",
-  "source_name": "galaxy-watch-manager-free-0.0.37.003-source.tar.gz",
-  "source_size": 5655858,
-  "source_sha256": "ac993196e9c77fcb382902251e70c8ed2fc201334725083dbbc119b4e7d574fd",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f1fed4700ca2759dfe0513cf97d02ddc535021b/galaxy-watch-manager-free-0.0.37.003-source.tar.gz"
+  "sha256": "ce4d9a50a13d448e759d773d5fd4cdbff957fddc7eb20332ce6aef1389e75fb2",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f47f587e66a59d866be4544a84a618689acfc23c/galaxy-watch-manager-free-0.0.37.004.apk",
+  "notes": "## 0.0.37.004 Nightly\n\n- **通知下发回归修复**：修正 `0.0.37.001` 引入图标后通知可能无法投递的问题。SetAsset 的 f2 改为应用访问元数据，图片使用与握手一致的 V1 附件标记及 FilePiece 文件流发送；所有文件块入队后才发送引用图片的通知，避免资产不可用阻塞通知业务投递。\n- **资产接收修正**：内联图片从官方 f3 读取，避免把 f2 的应用访问元数据误当作文件内容。缺图、超限或资产头/文件块入队失败时继续尝试文字通知，不携带悬空图标引用。\n- **验证与验收边界**：版本 `0.0.37.004`（versionCode `37004`），沿用正式签名，作为 Nightly 预发布。本地 Spotless、715 项 JVM 回归、Lint、Release 构建、1411 项双语资源及 83 项脚本回归通过；独立合成帧检查覆盖测试通知包名、文件块边界、32 KiB 队列切换和 64 KiB 上限，并使用官方 SQLite 资产就绪条件核对引用，通知文字字段与 `0.0.36` 对照一致。上述结果不代表真机接收；手机测试按钮、手表通知与图标展示、重连及重启持久化仍待安装验收。本轮不改变健康数据、采集设置、留存或导出结构。",
+  "source_name": "galaxy-watch-manager-free-0.0.37.004-source.tar.gz",
+  "source_size": 5657861,
+  "source_sha256": "52074e9bc456594cd482c1c25ba9ef2a1aba2f49584f2054b5771c6691b4602e",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f47f587e66a59d866be4544a84a618689acfc23c/galaxy-watch-manager-free-0.0.37.004-source.tar.gz"
 }
