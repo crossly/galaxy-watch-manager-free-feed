@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.37.004",
-  "version_code": 37004,
-  "published_at": "2026-11-16T02:46:02Z",
+  "version_name": "0.0.37.005",
+  "version_code": 37005,
+  "published_at": "2026-11-16T06:16:14Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.37.004.apk",
+  "apk_name": "galaxy-watch-manager-free-0.0.37.005.apk",
   "apk_size": 19629532,
-  "sha256": "ce4d9a50a13d448e759d773d5fd4cdbff957fddc7eb20332ce6aef1389e75fb2",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f47f587e66a59d866be4544a84a618689acfc23c/galaxy-watch-manager-free-0.0.37.004.apk",
-  "notes": "## 0.0.37.004 Nightly\n\n- **通知下发回归修复**：修正 `0.0.37.001` 引入图标后通知可能无法投递的问题。SetAsset 的 f2 改为应用访问元数据，图片使用与握手一致的 V1 附件标记及 FilePiece 文件流发送；所有文件块入队后才发送引用图片的通知，避免资产不可用阻塞通知业务投递。\n- **资产接收修正**：内联图片从官方 f3 读取，避免把 f2 的应用访问元数据误当作文件内容。缺图、超限或资产头/文件块入队失败时继续尝试文字通知，不携带悬空图标引用。\n- **验证与验收边界**：版本 `0.0.37.004`（versionCode `37004`），沿用正式签名，作为 Nightly 预发布。本地 Spotless、715 项 JVM 回归、Lint、Release 构建、1411 项双语资源及 83 项脚本回归通过；独立合成帧检查覆盖测试通知包名、文件块边界、32 KiB 队列切换和 64 KiB 上限，并使用官方 SQLite 资产就绪条件核对引用，通知文字字段与 `0.0.36` 对照一致。上述结果不代表真机接收；手机测试按钮、手表通知与图标展示、重连及重启持久化仍待安装验收。本轮不改变健康数据、采集设置、留存或导出结构。",
-  "source_name": "galaxy-watch-manager-free-0.0.37.004-source.tar.gz",
-  "source_size": 5657861,
-  "source_sha256": "52074e9bc456594cd482c1c25ba9ef2a1aba2f49584f2054b5771c6691b4602e",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/f47f587e66a59d866be4544a84a618689acfc23c/galaxy-watch-manager-free-0.0.37.004-source.tar.gz"
+  "sha256": "82c2db2750359d4826fcd9eb11012be752004e0bd6aa8ca5c976c5311ebd6d00",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f0a837d739e3582e90aeb6ae464bd2b1de1d529/galaxy-watch-manager-free-0.0.37.005.apk",
+  "notes": "## 0.0.37.005 Nightly\n\n- **健康检测器兼容身份恢复**：修复 `0.0.37.004` 上非三星手机的手表 Samsung Health Monitor 再次要求三星手机的问题。WCS `feature_exchange` 恢复既有兼容身份 `deviceName=\"Galaxy S25 Ultra\"`、`modelNumber=\"SM-S938U1\"`、`vender=\"samsung\"`、`isTablet=\"false\"`、`csc=\"XAA\"`；SHM 从 companion provider 的 `vendor` 读取该值，不满足判断时打开 `ErrorActivity(type=3)`。实际蓝牙名、屏幕像素、语言、时区、时间与默认短信包仍取运行环境，不写入健康记录或导出的手表型号。\n- **状态交换一致性**：手机→手表 `status_exchange` 的 `mcc=\"310\"`、`mnc=\"410\"`、`simCountry=\"us\"` 与既有 `SM-S938U1`/`XAA` 兼容身份保持一致，`devicePlatformVersion` 仅发送 `Build.VERSION.RELEASE` 首个点分段，其余字段按官方 `StatusExchangeMessage` 核对。手表端已解包应用中只有 companion `vendor` 被 SHM 读取，本项不改 ECG/BP 门槛，也不代表地区资格或医学功能已获验证。\n- **概览免打扰立即开关**：概览「勿扰同步」改为「免打扰」，点击直接写 `dnd_turn_on_now` 立即开/关手表免打扰；不再写只作为手表侧偏好、且手机端观察器未实现的 `sync_do_not_disturb/enabled`，避免点击无实际效果。\n- **设置页移除同步开关**：移除「同步手机勿扰模式」开关及其状态、文案。手机端 `ZEN_MODE` 观察器和手机→手表自动推送未实现，保留开关会误导；诊断设置中该原始路径的标签保留。\n- **发布与文档**：`scripts/release-notes.py` 新增 `--collect-nightlies`（按时间提取上一稳定线全部 Nightly）与 `--check-nightlies`（稳定版发布前校验 Nightly 章节覆盖",
+  "source_name": "galaxy-watch-manager-free-0.0.37.005-source.tar.gz",
+  "source_size": 5668053,
+  "source_sha256": "a4aedf79277801329f17f31f42ad267c24fe67d0a2d8dfd23f9005ac16774faf",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1f0a837d739e3582e90aeb6ae464bd2b1de1d529/galaxy-watch-manager-free-0.0.37.005-source.tar.gz"
 }
