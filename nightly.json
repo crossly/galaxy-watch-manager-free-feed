@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.37.008",
-  "version_code": 37008,
-  "published_at": "2026-11-16T13:08:42Z",
+  "version_name": "0.0.38.001",
+  "version_code": 38001,
+  "published_at": "2026-11-17T11:31:18Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.37.008.apk",
-  "apk_size": 35054512,
-  "sha256": "11ca1d1c7f54140430b8b542736598ec3adcfd51a65df2e60796e3b2f66d2442",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/47f910d961b2bb0e0094dd5e1ae860168483f71c/galaxy-watch-manager-free-0.0.37.008.apk",
-  "notes": "## 0.0.37.008 Nightly\n\n- **三星健康与健康监测器独立同步**：两个数据源现在各自维护同步状态，健康监测器握手失败不再阻塞三星健康数据读取，仅有健康监测器时也能独立同步心电、血压记录；两者都不可用时才报告健康同步失败。监测器同步请求会排队等待明文握手完成，发送、解析、保存与确认异常按通道隔离；健康页同步文案聚合两个来源（双成功、仅三星健康、仅健康监测器、部分成功、双失败），错误 Toast 按实际失败阶段提示，不再使用笼统或错误的提示。\n- **免打扰立即生效与持久化**：每次下发免打扰前先开启手表的「手机勿扰同步」偏好，再写目标状态；目标进入发送队列即按 `dndSubmitted ?: dndOn` 乐观显示并允许反向点击，不再长期停留在「未确认」。已提交目标按配对设备与手表节点单独持久化，断开重连后恢复显示，手机应用进程重启也不丢失；手表在线反馈到来时以手表状态覆盖。\n- **天地图底图与地图退出修复**：运动轨迹预览与全屏地图从 OpenStreetMap 切换为天地图矢量底图与中文注记，预览逐瓦片合成两层底图，MapLibre 样式按底图、注记、轨迹排序。修复关闭全屏地图时 `connectionPool.evictAll()` 在主线程执行引发的 `NetworkOnMainThreadException`：请求取消与连接池清理解耦到进程级 IO 协程，视图脱离后再执行 `MapView.onDestroy()`。\n- **验证与验收边界**：版本 `0.0.37.008`（versionCode `37008`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、774 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、143 警告）、Release 构建、1444 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。免打扰与天地图改动已在同签名预览上完成手机与手表实测（详见 `docs/OPTIMIZATION-PROGRESS.md`）；三星健康/健康监测器双源同步未做真机验证，其握手隔离、按通道完成与失败提示仅有 JVM 回归。本轮不改变健康数据模型、采集设置、留存或导出结构（导出沿用 v4）。",
-  "source_name": "galaxy-watch-manager-free-0.0.37.008-source.tar.gz",
-  "source_size": 5715439,
-  "source_sha256": "0c25b8332fad2f1665197c5e6daeffe8e18548cf1a7eb5e09a4688aa5e5cbc8d",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/47f910d961b2bb0e0094dd5e1ae860168483f71c/galaxy-watch-manager-free-0.0.37.008-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.38.001.apk",
+  "apk_size": 35070896,
+  "sha256": "8f0ec671c30a9423a702491b036275bb8043d130ae8dd08e96a0735f2676f600",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/9aa5c383355f38aae46130d4adc70967638f55ed/galaxy-watch-manager-free-0.0.38.001.apk",
+  "notes": "## 0.0.38.001 Nightly\n\n- **新增：Flow 蓝牙联网代理**：手机端新增独立 `Flow` RFCOMM 服务（UUID `fafbdd20-83f0-4389-addf-917ac9dae5b2`），按官方帧表实现 1–18 类型：TCP 双向转发、UDP/UDP_V2 回包保留端点、PING 回显、PULL/PUSH 探测、默认网络类型与计费状态发布及可选握手；NIO Selector 非阻塞转发 IPv4 TCP/UDP，有界队列与拥塞暂停。仅监听当前选定且已绑定的手表，不提供 IPv6、VPN 或任意手机侧监听端口。真机验证：关闭手表 Wi-Fi 后天气应用仍通过蓝牙代理联网。\n- **新增：手机时间与时区同步**：`PhoneTimeSync` 在会话初始化完成及 `ACTION_TIME_CHANGED`/`ACTION_TIMEZONE_CHANGED` 时向手表发送校时 START；收到 `/settings/rpc` COMMAND=1 时逐字节保留请求其余 entry，仅替换 COMMAND=2 与 `COMPANION_TIME` 后回复，并按官方语义发送 `/timezone/rpc` 时区映射；关闭会话注销广播接收器。\n- **改进：官方按需心跳与 60 秒兜底**：移除固定 10 秒心跳线程，改为收到非心跳消息后在发送队列排空时补发一次官方空心跳（`inner=5a00`），无任何入站时由 writer 的 60 秒轮询超时发送一次兜底心跳，不对心跳回心跳。\n- **验证与验收边界**：版本 `0.0.38.001`（versionCode `38001`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、798 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、144 警告）、Release 构建、1444 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。真机：覆盖安装完成，WCS 握手（NodeInfo/SyncStart/DataItem 快照恢复）与前台连接服务正常；ADB 180 秒 logcat 实测 8 次 41B 心跳写入，空闲期两次精确 60.0 秒兜底，其余均紧跟入站非心跳帧（0.0~3.8 秒内），无 10 秒节奏、无断线。校时实际生",
+  "source_name": "galaxy-watch-manager-free-0.0.38.001-source.tar.gz",
+  "source_size": 5744776,
+  "source_sha256": "09497a8aa8ff69c2174d8104fa9a39b339e80e783bfea533de60f94a2040b9e6",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/9aa5c383355f38aae46130d4adc70967638f55ed/galaxy-watch-manager-free-0.0.38.001-source.tar.gz"
 }
