@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.38.001",
-  "version_code": 38001,
-  "published_at": "2026-11-17T11:31:18Z",
+  "version_name": "0.0.38.002",
+  "version_code": 38002,
+  "published_at": null,
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.38.001.apk",
-  "apk_size": 35070896,
-  "sha256": "8f0ec671c30a9423a702491b036275bb8043d130ae8dd08e96a0735f2676f600",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/9aa5c383355f38aae46130d4adc70967638f55ed/galaxy-watch-manager-free-0.0.38.001.apk",
-  "notes": "## 0.0.38.001 Nightly\n\n- **新增：Flow 蓝牙联网代理**：手机端新增独立 `Flow` RFCOMM 服务（UUID `fafbdd20-83f0-4389-addf-917ac9dae5b2`），按官方帧表实现 1–18 类型：TCP 双向转发、UDP/UDP_V2 回包保留端点、PING 回显、PULL/PUSH 探测、默认网络类型与计费状态发布及可选握手；NIO Selector 非阻塞转发 IPv4 TCP/UDP，有界队列与拥塞暂停。仅监听当前选定且已绑定的手表，不提供 IPv6、VPN 或任意手机侧监听端口。真机验证：关闭手表 Wi-Fi 后天气应用仍通过蓝牙代理联网。\n- **新增：手机时间与时区同步**：`PhoneTimeSync` 在会话初始化完成及 `ACTION_TIME_CHANGED`/`ACTION_TIMEZONE_CHANGED` 时向手表发送校时 START；收到 `/settings/rpc` COMMAND=1 时逐字节保留请求其余 entry，仅替换 COMMAND=2 与 `COMPANION_TIME` 后回复，并按官方语义发送 `/timezone/rpc` 时区映射；关闭会话注销广播接收器。\n- **改进：官方按需心跳与 60 秒兜底**：移除固定 10 秒心跳线程，改为收到非心跳消息后在发送队列排空时补发一次官方空心跳（`inner=5a00`），无任何入站时由 writer 的 60 秒轮询超时发送一次兜底心跳，不对心跳回心跳。\n- **验证与验收边界**：版本 `0.0.38.001`（versionCode `38001`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、798 项 JVM 回归（0 失败/错误/跳过）、Lint（0 错误、144 警告）、Release 构建、1444 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。真机：覆盖安装完成，WCS 握手（NodeInfo/SyncStart/DataItem 快照恢复）与前台连接服务正常；ADB 180 秒 logcat 实测 8 次 41B 心跳写入，空闲期两次精确 60.0 秒兜底，其余均紧跟入站非心跳帧（0.0~3.8 秒内），无 10 秒节奏、无断线。校时实际生",
-  "source_name": "galaxy-watch-manager-free-0.0.38.001-source.tar.gz",
-  "source_size": 5744776,
-  "source_sha256": "09497a8aa8ff69c2174d8104fa9a39b339e80e783bfea533de60f94a2040b9e6",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/9aa5c383355f38aae46130d4adc70967638f55ed/galaxy-watch-manager-free-0.0.38.001-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.38.002.apk",
+  "apk_size": 35136432,
+  "sha256": "bffdda9f9fd143fd14e454aa77c88fa89665ef7d3a6b1a9f7b52574d5d8d4c99",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1c6a6e0af5ded8477714fd6011f547922b02d100/galaxy-watch-manager-free-0.0.38.002.apk",
+  "notes": null,
+  "source_name": "galaxy-watch-manager-free-0.0.38.002-source.tar.gz",
+  "source_size": 5774560,
+  "source_sha256": "44c66b66a0ecdb850814dfc844af97be047a9221e6d06d0885f9d37fd94e8e15",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/1c6a6e0af5ded8477714fd6011f547922b02d100/galaxy-watch-manager-free-0.0.38.002-source.tar.gz"
 }
