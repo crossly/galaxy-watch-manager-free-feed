@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.38",
-  "version_code": 38000,
-  "published_at": "2026-11-16T13:34:54Z",
+  "version_name": "0.0.39",
+  "version_code": 39000,
+  "published_at": "2026-11-18T03:21:45Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.38.apk",
-  "apk_size": 35054512,
-  "sha256": "299227afc609e4680e96f3f1d2b06f2665ea6fb50cd67511a8a66e2b9e79eea3",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/35698cbd3a1d788d9b956780c4a1a3a8d7cd4f09/galaxy-watch-manager-free-0.0.38.apk",
-  "notes": "## 0.0.38\n\n- **新增：通知应用图标**：转发手机通知时读取来源应用图标，缩放为 96×96 PNG，通过 Wear OS Bridger 的 `app_icon` Asset、DataItem 引用表与 SetAsset 图片下发；图标读取与编码在后台队列完成，所有文件块入队后才发送引用图片的通知。应用不可见、读取/编码失败、图标超限或资产入队失败时回退纯文字通知；手表返回的 AckAsset 回执被正确识别，不再误报「未知握手 inner fields=5」。\n- **新增：运动轨迹地图**：运动详情增加轨迹预览与全屏地图。预览按轨迹范围选择缩放级，逐瓦片合成天地图 `vec_w` 矢量底图与 `cva_w` 中文注记后叠加分段轨迹与起终点；全屏支持拖动、缩放与恢复全程。加载失败或渲染失败回退本地轮廓，单点、无有效点及未收到载体分别提示；坐标系保持未知并提示可能偏移，不做地区偏移转换。关闭全屏地图时的渲染线程销毁竞态与主线程 `connectionPool.evictAll()` 引发的 `NetworkOnMainThreadException` 已修复。\n- **新增：健康导出 v4**：增加 `workout_routes.json`，从全部留存原始运动记录解析轨迹，按 `record_id` 关联父运动，不受界面最近 40 条限制；保留模块、修订、载体、点序、分段算法与未知坐标系，原始定位负载仍完整留在 `source_records.json`。同步 JSON Schema v4、manifest 轨迹/点/段数量与留存覆盖说明、逐文件校验和与导出文档。\n- **修复：健康同步按来源独立**：三星健康与健康监测器各自维护同步状态，监测器握手失败不再阻塞三星健康数据读取，仅有健康监测器时也能独立同步心电、血压记录。监测器同步请求排队等待明文握手，发送、解析、保存与确认异常按通道隔离；健康页文案聚合双成功、仅三星健康、仅健康监测器、部分成功与双失败，错误 Toast 按实际失败阶段提示。\n- **修复：免打扰执行链**：按官方 `putDoNotDisturb` 语义写入 `booleanIsChecked`、`from=\"phone\"`、`time` 与 `intZenDuration=0`，移除残留的 `longZenDurationEnd",
-  "source_name": "galaxy-watch-manager-free-0.0.38-source.tar.gz",
-  "source_size": 5716814,
-  "source_sha256": "1a9959379edca7e15f9938480e4f578419e3716cd929bbf4e1f639c06ed5afd5",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/35698cbd3a1d788d9b956780c4a1a3a8d7cd4f09/galaxy-watch-manager-free-0.0.38-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.39.apk",
+  "apk_size": 35152816,
+  "sha256": "92eb5c17465207930407a0a41b08acf72126c6540c8d869ba34cca30f650f8be",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fc2350d0bf5cf22333760af6ecfe1fed03df292a/galaxy-watch-manager-free-0.0.39.apk",
+  "notes": "## 0.0.39\n\n- **新增：Flow 蓝牙联网代理与手机校时**：手机端新增独立 `Flow` RFCOMM 服务（UUID `fafbdd20-83f0-4389-addf-917ac9dae5b2`），按官方帧表实现 1–18 类型：TCP 双向转发、UDP/UDP_V2 回包保留端点、PING 回显、PULL/PUSH 探测、默认网络类型与计费状态发布及可选握手；NIO Selector 非阻塞转发 IPv4 TCP/UDP，有界队列与拥塞暂停。仅监听当前选定且已绑定的手表，不提供 IPv6、VPN 或任意手机侧监听端口。`PhoneTimeSync` 在会话初始化完成及时间/时区变化时向手表发送校时 START，按官方语义保留请求其余字段并回复时区映射。\n- **改进：官方按需心跳与 60 秒兜底**：移除固定 10 秒心跳线程，改为收到非心跳消息后发送队列排空时补发一次官方空心跳，无任何入站时由 writer 的 60 秒轮询超时发送一次兜底心跳，不对心跳回心跳。\n- **新增：手机端能量得分计算与手表写回**：健康页新增能量得分卡片与详情，按用户输入的年龄与算法生理性别，使用当前设备留存的睡眠分期、睡眠区间心率/RMSSD 与活动日汇总计算 `com.samsung.shealth.vitality_score` 的每日得分（`phone_vitality_v1`）。结果按设备保存，保留稳定记录身份、单调修订、算法版本、完整输入与手表应答元数据；写回通过现有 WCS `/samsung_health/wearable_message` 的 `SYNC_DATA` 下发（`data_version=4`），支持发送失败、拒绝、超时、替换、断线与应答落盘失败。已核对重映射、四项总分权重、睡眠储备、小睡加分、活动 EMA 与生理基线；未完整复现官方主睡眠筛选与生理预处理，`official_equivalence_verified=false`，不宣称与三星官方完整管线等价；成功只确认对应修订收到应答，不证明手表实际展示或重启后持久化，未知非空字段仅在官方载荷投影中填 `-1` 不可用哨兵，本地记录保持 null。\n- **新增：能量资料独立保存与编辑、自动结算与缺失诊断**：年龄（18–99）与算法生理性别改为当前配对设备作用域的独立 `Energy",
+  "source_name": "galaxy-watch-manager-free-0.0.39-source.tar.gz",
+  "source_size": 5785249,
+  "source_sha256": "8cd52a3a1d007d5c28afe8bd599fb86922bffa2eeb5215836da248a9d3c9fd62",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fc2350d0bf5cf22333760af6ecfe1fed03df292a/galaxy-watch-manager-free-0.0.39-source.tar.gz"
 }
