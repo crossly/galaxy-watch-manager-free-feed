@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.39",
-  "version_code": 39000,
-  "published_at": "2026-11-18T03:21:45Z",
+  "version_name": "0.0.40",
+  "version_code": 40000,
+  "published_at": "2026-11-18T05:39:50Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.39.apk",
+  "apk_name": "galaxy-watch-manager-free-0.0.40.apk",
   "apk_size": 35152816,
-  "sha256": "92eb5c17465207930407a0a41b08acf72126c6540c8d869ba34cca30f650f8be",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fc2350d0bf5cf22333760af6ecfe1fed03df292a/galaxy-watch-manager-free-0.0.39.apk",
-  "notes": "## 0.0.39\n\n- **新增：Flow 蓝牙联网代理与手机校时**：手机端新增独立 `Flow` RFCOMM 服务（UUID `fafbdd20-83f0-4389-addf-917ac9dae5b2`），按官方帧表实现 1–18 类型：TCP 双向转发、UDP/UDP_V2 回包保留端点、PING 回显、PULL/PUSH 探测、默认网络类型与计费状态发布及可选握手；NIO Selector 非阻塞转发 IPv4 TCP/UDP，有界队列与拥塞暂停。仅监听当前选定且已绑定的手表，不提供 IPv6、VPN 或任意手机侧监听端口。`PhoneTimeSync` 在会话初始化完成及时间/时区变化时向手表发送校时 START，按官方语义保留请求其余字段并回复时区映射。\n- **改进：官方按需心跳与 60 秒兜底**：移除固定 10 秒心跳线程，改为收到非心跳消息后发送队列排空时补发一次官方空心跳，无任何入站时由 writer 的 60 秒轮询超时发送一次兜底心跳，不对心跳回心跳。\n- **新增：手机端能量得分计算与手表写回**：健康页新增能量得分卡片与详情，按用户输入的年龄与算法生理性别，使用当前设备留存的睡眠分期、睡眠区间心率/RMSSD 与活动日汇总计算 `com.samsung.shealth.vitality_score` 的每日得分（`phone_vitality_v1`）。结果按设备保存，保留稳定记录身份、单调修订、算法版本、完整输入与手表应答元数据；写回通过现有 WCS `/samsung_health/wearable_message` 的 `SYNC_DATA` 下发（`data_version=4`），支持发送失败、拒绝、超时、替换、断线与应答落盘失败。已核对重映射、四项总分权重、睡眠储备、小睡加分、活动 EMA 与生理基线；未完整复现官方主睡眠筛选与生理预处理，`official_equivalence_verified=false`，不宣称与三星官方完整管线等价；成功只确认对应修订收到应答，不证明手表实际展示或重启后持久化，未知非空字段仅在官方载荷投影中填 `-1` 不可用哨兵，本地记录保持 null。\n- **新增：能量资料独立保存与编辑、自动结算与缺失诊断**：年龄（18–99）与算法生理性别改为当前配对设备作用域的独立 `Energy",
-  "source_name": "galaxy-watch-manager-free-0.0.39-source.tar.gz",
-  "source_size": 5785249,
-  "source_sha256": "8cd52a3a1d007d5c28afe8bd599fb86922bffa2eeb5215836da248a9d3c9fd62",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fc2350d0bf5cf22333760af6ecfe1fed03df292a/galaxy-watch-manager-free-0.0.39-source.tar.gz"
+  "sha256": "85aa747322f2f59c22f3aec54d0a8f284925193ac9db8d802f211008adfc0762",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/86eb744638d261f41bbf5119fbcef225b2dc987a/galaxy-watch-manager-free-0.0.40.apk",
+  "notes": "## 0.0.40\n\n- **修复：应用升级与覆盖安装后通知转发失效**：应用升级或覆盖安装杀掉进程后，系统可能在 WCS 手表会话就绪前重绑通知监听服务导致特性交换丢失，或系统延迟重绑导致通知回调未就绪。`WatchRepository.onSessionReady` 改为在新 WCS 会话就绪时重发通知桥接特性交换与设置（`notification_feature_exchange`），覆盖监听先于会话连接的场景；新增 `NotificationListenerRecovery`，在进程启动与通知设置页返回前台时，若已授权但监听未连接，节流（2000ms）调用 `NotificationListenerService.requestRebind` 恢复绑定；`onListenerDisconnected` 记录状态；通知设置页重新开启转发且会话就绪时立即重发特性交换。\n- **测试与升级**：相对 `0.0.39` 已安装用户可直接覆盖升级。版本 `0.0.40`（versionCode `40000`），沿用正式签名。发布门禁包含 Spotless、832 项 JVM 单测（0 失败/错误/跳过）、Lint（0 Errors）、Release 构建、1486 项双语资源与 91 项脚本回归。该修复仅完成合成单测与静态门禁，覆盖安装后的真实通知到达与重绑回调仍需在真机场景进一步验证。",
+  "source_name": "galaxy-watch-manager-free-0.0.40-source.tar.gz",
+  "source_size": 5789086,
+  "source_sha256": "b85e18ebe5bb995f32967738f78636fd9b3ec56962cc8865dc6e4a0335e2d677",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/86eb744638d261f41bbf5119fbcef225b2dc987a/galaxy-watch-manager-free-0.0.40-source.tar.gz"
 }
