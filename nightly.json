@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.40.002",
-  "version_code": 40002,
-  "published_at": "2026-11-20T03:54:23Z",
+  "version_name": "0.0.40.003",
+  "version_code": 40003,
+  "published_at": null,
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.40.002.apk",
-  "apk_size": 35156912,
-  "sha256": "643370fc4771251bbe99161a3d3ab2a218df0463b08131b395f487d8db604c38",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/71827ff6a7cb69021ab1cebff2739fdc949f44e5/galaxy-watch-manager-free-0.0.40.002.apk",
-  "notes": "## 0.0.40.002 Nightly\n\n- **优化：使用手机时不提醒手表**：新增使用手机时通知手表不提醒偏好（默认开启，与官方三星体验一致）。通过 `PhoneStatusDetector` 检测手机屏幕交互与锁屏状态（`PowerManager.isInteractive && !KeyguardManager.isKeyguardLocked`），当手机屏幕点亮且解锁处于活跃使用中时，`NotificationBridgeService` 直接跳过向手表的通知转发并输出 `(USING_PHONE)` 诊断日志；在通知设置界面提供“使用手机时不提醒”开关与双语文案，并通过 WCS 协议 `alerts_on_watch`（0=开/仅未在使用手机时提醒，1=关/即使使用手机也提醒）与手表端双向同步。\n- **验证与验收边界**：版本 `0.0.40.002`（versionCode `40002`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、839 项单元测试（0 失败/错误/跳过）、Lint（0 错误）、Release 构建、1488 项双语资源与 91 项脚本回归通过；最终未签名 APK 通过完整资源检查。当前无在线 ADB 设备，真机亮屏/解锁与息屏来通知的手表提醒体验待真机验收。",
-  "source_name": "galaxy-watch-manager-free-0.0.40.002-source.tar.gz",
-  "source_size": 5796065,
-  "source_sha256": "e8d795bea6b023f99574556e0f3417585a1152aab6c6fa84ab1065ca59ed66ec",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/71827ff6a7cb69021ab1cebff2739fdc949f44e5/galaxy-watch-manager-free-0.0.40.002-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.40.003.apk",
+  "apk_size": 35161008,
+  "sha256": "c880f6718a25beb70553d5ab57e33c888692e759181825d52484d261ab8d56c2",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d1b9a5126614cdd4a0abd7e70494c7e797a25cbf/galaxy-watch-manager-free-0.0.40.003.apk",
+  "notes": null,
+  "source_name": "galaxy-watch-manager-free-0.0.40.003-source.tar.gz",
+  "source_size": 5799413,
+  "source_sha256": "279d2d7eef99aff8ec0ca6266eee36ea6cf8a3a485c8dd167be408eb3760cce6",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d1b9a5126614cdd4a0abd7e70494c7e797a25cbf/galaxy-watch-manager-free-0.0.40.003-source.tar.gz"
 }
