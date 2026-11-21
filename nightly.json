@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.40.005",
-  "version_code": 40005,
+  "version_name": "0.0.40.006",
+  "version_code": 40006,
   "published_at": null,
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.40.005.apk",
+  "apk_name": "galaxy-watch-manager-free-0.0.40.006.apk",
   "apk_size": 35165104,
-  "sha256": "e9226185051633e9e6b0b992990e42b8246ea13cf143b0a6e5e020c98fbcccd1",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/64f1589edf27968f70c9982cf86495bd00e8ea6a/galaxy-watch-manager-free-0.0.40.005.apk",
+  "sha256": "1e592926c47a271a497a5249ded0c94ef45b0bbb1b1af7b29445499abf63a3da",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/04b759810ac856fe658effabb57663ff1f54038e/galaxy-watch-manager-free-0.0.40.006.apk",
   "notes": null,
-  "source_name": "galaxy-watch-manager-free-0.0.40.005-source.tar.gz",
-  "source_size": 5806356,
-  "source_sha256": "bac7c141e7504b5900a93f53f98f259a19ef0552f460dec812802879fcdae69c",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/64f1589edf27968f70c9982cf86495bd00e8ea6a/galaxy-watch-manager-free-0.0.40.005-source.tar.gz"
+  "source_name": "galaxy-watch-manager-free-0.0.40.006-source.tar.gz",
+  "source_size": 5809551,
+  "source_sha256": "a3d9b09e2f1ac6068d7322fb9b0f13a753887a40308fbf741d388c4826a1d6c1",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/04b759810ac856fe658effabb57663ff1f54038e/galaxy-watch-manager-free-0.0.40.006-source.tar.gz"
 }
