@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.40",
-  "version_code": 40000,
-  "published_at": "2026-11-18T05:39:50Z",
+  "version_name": "0.0.41",
+  "version_code": 41000,
+  "published_at": "2026-11-23T09:53:36+08:00",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.40.apk",
-  "apk_size": 35152816,
-  "sha256": "85aa747322f2f59c22f3aec54d0a8f284925193ac9db8d802f211008adfc0762",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/86eb744638d261f41bbf5119fbcef225b2dc987a/galaxy-watch-manager-free-0.0.40.apk",
-  "notes": "## 0.0.40\n\n- **修复：应用升级与覆盖安装后通知转发失效**：应用升级或覆盖安装杀掉进程后，系统可能在 WCS 手表会话就绪前重绑通知监听服务导致特性交换丢失，或系统延迟重绑导致通知回调未就绪。`WatchRepository.onSessionReady` 改为在新 WCS 会话就绪时重发通知桥接特性交换与设置（`notification_feature_exchange`），覆盖监听先于会话连接的场景；新增 `NotificationListenerRecovery`，在进程启动与通知设置页返回前台时，若已授权但监听未连接，节流（2000ms）调用 `NotificationListenerService.requestRebind` 恢复绑定；`onListenerDisconnected` 记录状态；通知设置页重新开启转发且会话就绪时立即重发特性交换。\n- **测试与升级**：相对 `0.0.39` 已安装用户可直接覆盖升级。版本 `0.0.40`（versionCode `40000`），沿用正式签名。发布门禁包含 Spotless、832 项 JVM 单测（0 失败/错误/跳过）、Lint（0 Errors）、Release 构建、1486 项双语资源与 91 项脚本回归。该修复仅完成合成单测与静态门禁，覆盖安装后的真实通知到达与重绑回调仍需在真机场景进一步验证。",
-  "source_name": "galaxy-watch-manager-free-0.0.40-source.tar.gz",
-  "source_size": 5789086,
-  "source_sha256": "b85e18ebe5bb995f32967738f78636fd9b3ec56962cc8865dc6e4a0335e2d677",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/86eb744638d261f41bbf5119fbcef225b2dc987a/galaxy-watch-manager-free-0.0.40-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.41.apk",
+  "apk_size": 35169200,
+  "sha256": "618b0496508d4a44926d5d465c937e52a24300e9c53ce18215a60d4d0f861930",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/618557161f8ad58890eb11bdc0ea50f8ce905a88/galaxy-watch-manager-free-0.0.41.apk",
+  "notes": "## 0.0.41\n\n- **新增：使用手机时不提醒手表**：新增「使用手机时不提醒」偏好（默认开启，与官方三星体验一致）。`PhoneStatusDetector` 以 `PowerManager.isInteractive && !KeyguardManager.isKeyguardLocked` 判定手机处于点亮且解锁的活跃使用状态，活跃时 `NotificationBridgeService` 直接跳过向手表转发并输出 `(USING_PHONE)` 诊断日志；通知设置页提供开关，并通过 WCS 的 `alerts_on_watch` 与手表端双向同步。\n- **新增：Galaxy Watch8 与 Watch8 Classic 识别与官方插件交接**：逆向核对 Galaxy Wearable `2.2.72.26092361` 机型表与官方 Watch Manager `2.2.17.26103051` 插件（`com.samsung.wearable.watchuniteplugin`）的清单与签名，支持 Watch8 / Watch8 Classic（`SM-L320`、`SM-L325`、`SM-L330`、`SM-L335`、`SM-L500`、`SM-L505` 等蓝牙与 LTE 机型）的自动识别与 Classic 外观；官方应用交接引入该共用插件白名单、应用详情跳转与 Shizuku 授权下的状态接管/恢复，并补齐包可见性声明。\n- **新增：通知图标诊断命令**：`adb shell am broadcast -a dev.ricky.galaxywatchmanagerfree.CMD --es cmd notif_probe --es pkg <包名> --es app <名称> --es color '#RRGGBB' --es mode app|small|both|fetch|none`，用纯色图标走与真实图标完全相同的资产链路，可直接判定资产是否被手表渲染；`mode fetch` 只登记引用与缓存、不上传，用于观察手表是否回拉资产。\n- **修复：第三方应用（微信、QQ、Telegram 等）通知图标全部回退为通用图标**：根因不在图片格式或 DataMap 字段，而在 Wear 资产下发的访问控制。`SetAsset`（`hj",
+  "source_name": "galaxy-watch-manager-free-0.0.41-source.tar.gz",
+  "source_size": 5824037,
+  "source_sha256": "06f45158885278bcaa9a7414e77e8b42bf43653d0ddd987ab8b958ade9fda661",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/618557161f8ad58890eb11bdc0ea50f8ce905a88/galaxy-watch-manager-free-0.0.41-source.tar.gz"
 }
