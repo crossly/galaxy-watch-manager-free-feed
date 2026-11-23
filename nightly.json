@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.40.007",
-  "version_code": 40007,
-  "published_at": "2026-11-23T01:33:25+08:00",
+  "version_name": "0.0.41.001",
+  "version_code": 41001,
+  "published_at": "2026-11-23T13:47:16+08:00",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.40.007.apk",
-  "apk_size": 35169200,
-  "sha256": "4d8a414c2b96989af3d00b5009dc215887b85d7d940d5af4fdebdef801a2e9f2",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/434d5dd21fb5c91ddddae6caa5a93954eb6ee895/galaxy-watch-manager-free-0.0.40.007.apk",
-  "notes": "## 0.0.40.007 Nightly\n\n- **修复：微信、QQ、Telegram 等第三方应用的手表通知图标全部回退为通用图标**：根因不在图片格式或 DataMap 字段，而在 Wear 资产下发的访问控制。`SetAsset`（`hjo.f4 = hjw`）中拥有者列表必须写在 **f3 = `hid`**（`hid.f1` 为重复的 `hif{f1 应用包名, f2 签名摘要}`），f2 是内联数据位置；此前实现把拥有者错塞进 f2，手表端虽然回 `AckAsset` 保存了字节，却没有建立（包名, 签名摘要）的访问控制记录，DataItem 里的资产引用始终不可解析，通知卡片只能显示短信气泡或通用图标。新增 `wcs/WearAssetSender.kt` 统一 `SetAsset` + `FilePiece`（f3 携带拥有者、分片 `12288-73` 字节、queueId 5/6 规则）；`WcsSession` 增加对官方 **FetchAsset**（`hjo.f6 = hjd{f1 包名, f2 摘要, f3 urgent, f4 签名摘要}`）的应答，用最近 8 个资产字节按请求方身份重发，作为资产缓存失效时的安全网；图标编码改回官方 Wear 手机端使用的 **PNG 无损**，仍按最大边 56px / 40px 等比缩放。\n- **修复：补齐官方 Bridger DataMap 字段集**：对齐 Samsung 手机插件内置的 GMS `wear_companion` 发送器（`zzewl`），新增 `notification_style`（标准样式 `1`）、`title_html` / `text_html`（HTML 转义、换行转 `<br>`）、`post_time_millis`、`color`、`has_content_intent`、`only_alert_once`、`is_work_profile`、`is_emergency`、`is_group_summary`，并始终下发 `is_small_icon_vector_drawable`。缺少 `notification_style` 时手表端无法确定通知模板，只能回退通用样式。\n- **新增：通知图标诊断命令**：`adb shell am broadcast",
-  "source_name": "galaxy-watch-manager-free-0.0.40.007-source.tar.gz",
-  "source_size": 5819280,
-  "source_sha256": "f11b80aa663ee02728a432b384726c980b15e489a2827f61fe9c71548a51c803",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/434d5dd21fb5c91ddddae6caa5a93954eb6ee895/galaxy-watch-manager-free-0.0.40.007-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.41.001.apk",
+  "apk_size": 35173296,
+  "sha256": "17cdf8301395cc6e8bdb511e9c58bd1c556bf81db73c292a60d67031740e8a67",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d923a8eddac0a1fe0473909f357905842461b334/galaxy-watch-manager-free-0.0.41.001.apk",
+  "notes": "## 0.0.41.001 Nightly\n\n- **修复：健康监测器（心电图 / 血压）握手被手表以证书不匹配拒收**：根因是 SHM 通道复用了手机健康证书摘要 `9741a0f3…`。手表 WearableService 按（包名 + 证书）投递，只有与手表上已安装目标 App 的 AppKey 完全一致才会交给应用，否则打印 `Mismatched certificate: AppKey[...]` 并静默丢弃；手表端 SHM 由平台证书 `9ca5170f…` 签名，因此 `/plain_connection` 一直无法到达监测器。三星健康通道走 OEM companion 重路由，不受影响。现在 `/plain_connection`、`/991`、`/992`、`/993` 及各自的 ACK 默认使用 `HealthMonitorProtocol.WATCH_SIGNATURE`（`9ca5170f…`），手机健康证书只保留给 `/samsung_health/*` 与 Capability DataItem 路径。\n- **修复：握手身份按设备探测、回退与记忆**：握手 10 秒无应答时自动切换另一身份重试一次，覆盖不同手表固件接受不同 AppKey 的情况；握手确认后把生效身份按配对地址写入 `DeviceIdentityStore.monitorSignature`，后续会话直接复用，不再每次多等一轮超时。\n- **验证与验收边界**：版本 `0.0.41.001`（versionCode `41001`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、860 项 JVM 单测（0 失败/错误/跳过，新增身份默认值、切换重试与只重试一次三个用例）、Lint（0 Errors / 146 Warnings）、Release 构建、1491 项双语资源、97 项脚本回归与公开资源检查通过。签发依据：反编译 Wear OS `WearableChimeraService.s(AppKey)` 的 `Mismatched certificate` 分支、`apksigner` 核对的手机版 SHM `9741a0f3…` 与手表版 SHM `9ca5170f…` 证书，以及用户手表日志里 94 次握手 0 次应答。真机握手与 ECG",
+  "source_name": "galaxy-watch-manager-free-0.0.41.001-source.tar.gz",
+  "source_size": 5830020,
+  "source_sha256": "d932c4df509520115f933c200da0005070e54317878cf1184e88fb43f5679386",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d923a8eddac0a1fe0473909f357905842461b334/galaxy-watch-manager-free-0.0.41.001-source.tar.gz"
 }
