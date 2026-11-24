@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.41",
-  "version_code": 41000,
-  "published_at": "2026-11-23T09:53:36+08:00",
+  "version_name": "0.0.42",
+  "version_code": 42000,
+  "published_at": "2026-11-24T16:39:33Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.41.apk",
-  "apk_size": 35169200,
-  "sha256": "618b0496508d4a44926d5d465c937e52a24300e9c53ce18215a60d4d0f861930",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/618557161f8ad58890eb11bdc0ea50f8ce905a88/galaxy-watch-manager-free-0.0.41.apk",
-  "notes": "## 0.0.41\n\n- **新增：使用手机时不提醒手表**：新增「使用手机时不提醒」偏好（默认开启，与官方三星体验一致）。`PhoneStatusDetector` 以 `PowerManager.isInteractive && !KeyguardManager.isKeyguardLocked` 判定手机处于点亮且解锁的活跃使用状态，活跃时 `NotificationBridgeService` 直接跳过向手表转发并输出 `(USING_PHONE)` 诊断日志；通知设置页提供开关，并通过 WCS 的 `alerts_on_watch` 与手表端双向同步。\n- **新增：Galaxy Watch8 与 Watch8 Classic 识别与官方插件交接**：逆向核对 Galaxy Wearable `2.2.72.26092361` 机型表与官方 Watch Manager `2.2.17.26103051` 插件（`com.samsung.wearable.watchuniteplugin`）的清单与签名，支持 Watch8 / Watch8 Classic（`SM-L320`、`SM-L325`、`SM-L330`、`SM-L335`、`SM-L500`、`SM-L505` 等蓝牙与 LTE 机型）的自动识别与 Classic 外观；官方应用交接引入该共用插件白名单、应用详情跳转与 Shizuku 授权下的状态接管/恢复，并补齐包可见性声明。\n- **新增：通知图标诊断命令**：`adb shell am broadcast -a dev.ricky.galaxywatchmanagerfree.CMD --es cmd notif_probe --es pkg <包名> --es app <名称> --es color '#RRGGBB' --es mode app|small|both|fetch|none`，用纯色图标走与真实图标完全相同的资产链路，可直接判定资产是否被手表渲染；`mode fetch` 只登记引用与缓存、不上传，用于观察手表是否回拉资产。\n- **修复：第三方应用（微信、QQ、Telegram 等）通知图标全部回退为通用图标**：根因不在图片格式或 DataMap 字段，而在 Wear 资产下发的访问控制。`SetAsset`（`hj",
-  "source_name": "galaxy-watch-manager-free-0.0.41-source.tar.gz",
-  "source_size": 5824037,
-  "source_sha256": "06f45158885278bcaa9a7414e77e8b42bf43653d0ddd987ab8b958ade9fda661",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/618557161f8ad58890eb11bdc0ea50f8ce905a88/galaxy-watch-manager-free-0.0.41-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.42.apk",
+  "apk_size": 35263408,
+  "sha256": "a67b5b2e19efd4bfcd674457a097ea146d8dcfcb8d7a62ec6ee5dd2fb1f00890",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fac98c20f8a6e190e09ea3417a3f7bf6ec16813d/galaxy-watch-manager-free-0.0.42.apk",
+  "notes": "## 0.0.42\n\n- **修复：能量得分展示、计算与手表写回**：修复健康页与详情页未显示能量得分的问题，适配无日汇总固件的活动时长合成；重构资料填写界面，支持保存后直接展示并即时计算；写回手表改为同步近 7 天窗口，补充非今日日期标注与手表当日展示说明。\n- **修复：心电图 / 血压同步与展示**：监测器通道改用手表证书并支持双身份自动切换与记忆；补齐心电图症状/算法版本及血压校准关联信息同步与展示。\n- **修复：健康同步、连接接管与删除同步**：完善健康能力协商、删除墓碑（`deleted_data`）同步及 WCS/RFCOMM 断连与节点身份恢复，官方应用交接提示全量支持双语。\n- **优化：存储、缓存与健康导出 v7**：原始健康记录改为独立原子文件存储，优化运动轨迹地图瓦片缓存与 Flow 代理过滤；健康导出升级至 v7（含心电/血压元数据与删除墓碑）。\n- **测试与升级**：汇总 `0.0.41.001` Nightly 及后续修复，可直接覆盖升级。版本 `0.0.42`（`42000`），通过 891 项单测、Lint 与资源校验，并在 HONOR + Watch Ultra 完成核心链路联调。",
+  "source_name": "galaxy-watch-manager-free-0.0.42-source.tar.gz",
+  "source_size": 5877959,
+  "source_sha256": "eb8bc8c2c2a9cde7aaf93314f6c100c333e988ee7af69f77b1f688647fdb10c4",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fac98c20f8a6e190e09ea3417a3f7bf6ec16813d/galaxy-watch-manager-free-0.0.42-source.tar.gz"
 }
