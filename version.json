@@ -1,16 +1,16 @@
 {
   "channel": "stable",
-  "version_name": "0.0.42",
-  "version_code": 42000,
-  "published_at": "2026-11-24T16:39:33Z",
+  "version_name": "0.0.43",
+  "version_code": 43000,
+  "published_at": "2026-11-25T04:59:03Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.42.apk",
-  "apk_size": 35263408,
-  "sha256": "a67b5b2e19efd4bfcd674457a097ea146d8dcfcb8d7a62ec6ee5dd2fb1f00890",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fac98c20f8a6e190e09ea3417a3f7bf6ec16813d/galaxy-watch-manager-free-0.0.42.apk",
-  "notes": "## 0.0.42\n\n- **修复：能量得分展示、计算与手表写回**：修复健康页与详情页未显示能量得分的问题，适配无日汇总固件的活动时长合成；重构资料填写界面，支持保存后直接展示并即时计算；写回手表改为同步近 7 天窗口，补充非今日日期标注与手表当日展示说明。\n- **修复：心电图 / 血压同步与展示**：监测器通道改用手表证书并支持双身份自动切换与记忆；补齐心电图症状/算法版本及血压校准关联信息同步与展示。\n- **修复：健康同步、连接接管与删除同步**：完善健康能力协商、删除墓碑（`deleted_data`）同步及 WCS/RFCOMM 断连与节点身份恢复，官方应用交接提示全量支持双语。\n- **优化：存储、缓存与健康导出 v7**：原始健康记录改为独立原子文件存储，优化运动轨迹地图瓦片缓存与 Flow 代理过滤；健康导出升级至 v7（含心电/血压元数据与删除墓碑）。\n- **测试与升级**：汇总 `0.0.41.001` Nightly 及后续修复，可直接覆盖升级。版本 `0.0.42`（`42000`），通过 891 项单测、Lint 与资源校验，并在 HONOR + Watch Ultra 完成核心链路联调。",
-  "source_name": "galaxy-watch-manager-free-0.0.42-source.tar.gz",
-  "source_size": 5877959,
-  "source_sha256": "eb8bc8c2c2a9cde7aaf93314f6c100c333e988ee7af69f77b1f688647fdb10c4",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/fac98c20f8a6e190e09ea3417a3f7bf6ec16813d/galaxy-watch-manager-free-0.0.42-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.43.apk",
+  "apk_size": 35345328,
+  "sha256": "cc7e7488e90b5f7027b53d2c0461959edac3d7f6b095bacf62807baf2fed8075",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/5c174d8be106b7ab8a957002103390badfe3257d/galaxy-watch-manager-free-0.0.43.apk",
+  "notes": "## 0.0.43\n\n- **新增：远程强制更新与紧急下架策略（Fail-Open + 应用内直更）**：策略文件独立托管于公开更新源 `policy.json`（配套 `scripts/write-update-policy.py` 生成与校验），支持 `force_update`（版本下限或定点版本拦截）与 `block`（紧急停用/下架）。拉取采用 4.5 秒短超时并按用户镜像偏好在直连 GitHub 与内置镜像间自动回退，超时、不可达、404 或非合法载荷一律静默放行，不打断正常使用；命中 `force_update` 时直接复用设置页应用内更新模块自动下载、校验 SHA-256 与官方发布签名并唤起系统安装，支持页内切换镜像重下，仅在下载失败或清单未就绪时回退浏览器页面；同步修复拦截态冷启前台服务竞态，支持时间戳防缓存与 24 小时 TTL / 双镜像 404 共识自动解除。\n- **新增：能量得分每日自动写回手表**：手机端计算出当日能量得分（含真实 `deviceuuid`）且手表在线（或离线算出后重连同步完成）时自动写回近 7 天窗口；同一自然日内自动或手动写回成功后不再重复自动推送，跨日自动恢复资格，失败启用 5 分钟冷却并随时支持手动重推。\n- **新增与修复：血管负荷能力对齐、自动建立基线与空记录自愈**：手机能力声明对齐官方 Samsung Health 7.1 结构与版本门控，按当前手表 `deviceuuid` 精准判定是否已初始化并完整保留历史记录与导出；确认当前手表未建立基线且用户未关闭血管负荷开关时，自动按手表协议版本（v2/v1）发起初始化建立基线，无需手动触发，同时保留兜底手动启用、带二次确认的基线重置及空记录零游标回补自愈。\n- **修复：概览页快捷控制协议对齐与交互优化**：\n  - **查找手表**：新增 `WatchFindControl` 对齐 `/w_apps_find_my_watch` 官方扁平 `msg_id` 协议，移除畸形 WCS 帧与不存在的 `fmw-find-req`，补齐建连状态同步、拒收原因（含通话中）提示、手表手动结束应答与断连状态归零；\n  - **省电模式**：修复 `/w_module_sec_watch_setting/psm` 确认键前导斜杠不一致及整型 `0/1` 回包未更新 `ps",
+  "source_name": "galaxy-watch-manager-free-0.0.43-source.tar.gz",
+  "source_size": 5919212,
+  "source_sha256": "3a2b8b1536cf2fc48485b8cf5fe5081352feed88dea9d2fe64b9ab091f7d9cec",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/5c174d8be106b7ab8a957002103390badfe3257d/galaxy-watch-manager-free-0.0.43-source.tar.gz"
 }
