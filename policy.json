@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "package": "dev.ricky.galaxywatchmanagerfree",
-  "mode": "force_update",
-  "min_supported_version_code": 43000,
+  "mode": "block",
+  "min_supported_version_code": 0,
   "blocked_version_codes": [],
-  "target_version_name": "0.0.43",
-  "target_version_code": 43000,
-  "title": null,
-  "title_zh": "强更测试：需要更新后继续使用",
-  "message": null,
-  "message_zh": "这是强制更新实机验收测试（仅当前测试包触发，测试完成后立即清理）。",
+  "target_version_name": null,
+  "target_version_code": null,
+  "title": "Discontinuation Test: Service Stopped",
+  "title_zh": "下架测试：应用已停止服务",
+  "message": "Temporary emergency block verification test (affects only this test build).",
+  "message_zh": "这是紧急下架拦截实机验收测试（仅当前测试包触发，测试完成后立即清理）。",
   "action_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "updated_at": "2026-11-25T03:37:15+00:00"
+  "updated_at": "2026-11-25T03:46:02+00:00"
 }
