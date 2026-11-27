@@ -1,16 +1,16 @@
 {
   "channel": "nightly",
-  "version_name": "0.0.41.001",
-  "version_code": 41001,
-  "published_at": "2026-11-23T13:47:16+08:00",
+  "version_name": "0.0.43.001",
+  "version_code": 43001,
+  "published_at": "2026-11-27T13:57:01Z",
   "page_url": "https://github.com/crossly/galaxy-watch-manager-free-feed",
-  "apk_name": "galaxy-watch-manager-free-0.0.41.001.apk",
-  "apk_size": 35173296,
-  "sha256": "17cdf8301395cc6e8bdb511e9c58bd1c556bf81db73c292a60d67031740e8a67",
-  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d923a8eddac0a1fe0473909f357905842461b334/galaxy-watch-manager-free-0.0.41.001.apk",
-  "notes": "## 0.0.41.001 Nightly\n\n- **修复：健康监测器（心电图 / 血压）握手被手表以证书不匹配拒收**：根因是 SHM 通道复用了手机健康证书摘要 `9741a0f3…`。手表 WearableService 按（包名 + 证书）投递，只有与手表上已安装目标 App 的 AppKey 完全一致才会交给应用，否则打印 `Mismatched certificate: AppKey[...]` 并静默丢弃；手表端 SHM 由平台证书 `9ca5170f…` 签名，因此 `/plain_connection` 一直无法到达监测器。三星健康通道走 OEM companion 重路由，不受影响。现在 `/plain_connection`、`/991`、`/992`、`/993` 及各自的 ACK 默认使用 `HealthMonitorProtocol.WATCH_SIGNATURE`（`9ca5170f…`），手机健康证书只保留给 `/samsung_health/*` 与 Capability DataItem 路径。\n- **修复：握手身份按设备探测、回退与记忆**：握手 10 秒无应答时自动切换另一身份重试一次，覆盖不同手表固件接受不同 AppKey 的情况；握手确认后把生效身份按配对地址写入 `DeviceIdentityStore.monitorSignature`，后续会话直接复用，不再每次多等一轮超时。\n- **验证与验收边界**：版本 `0.0.41.001`（versionCode `41001`），沿用正式签名并作为 Nightly 预发布。本地 Spotless、860 项 JVM 单测（0 失败/错误/跳过，新增身份默认值、切换重试与只重试一次三个用例）、Lint（0 Errors / 146 Warnings）、Release 构建、1491 项双语资源、97 项脚本回归与公开资源检查通过。签发依据：反编译 Wear OS `WearableChimeraService.s(AppKey)` 的 `Mismatched certificate` 分支、`apksigner` 核对的手机版 SHM `9741a0f3…` 与手表版 SHM `9ca5170f…` 证书，以及用户手表日志里 94 次握手 0 次应答。真机握手与 ECG",
-  "source_name": "galaxy-watch-manager-free-0.0.41.001-source.tar.gz",
-  "source_size": 5830020,
-  "source_sha256": "d932c4df509520115f933c200da0005070e54317878cf1184e88fb43f5679386",
-  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/d923a8eddac0a1fe0473909f357905842461b334/galaxy-watch-manager-free-0.0.41.001-source.tar.gz"
+  "apk_name": "galaxy-watch-manager-free-0.0.43.001.apk",
+  "apk_size": 35349424,
+  "sha256": "13c091d7e9929514b6ba7d0f610740699d0d116020520a34dccfe7859d3b1d74",
+  "apk_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/b96c6c0b5960d0c7094797df43987daee6fcffa8/galaxy-watch-manager-free-0.0.43.001.apk",
+  "notes": "## 0.0.43.001 Nightly\n\n- **修复：兼容 Watch Samsung Health 7.x 睡眠协议（SRBR 能力协商 + 7-ACC 降级解析）**：Watch Samsung Health `7.1.4.001` 启用了 `sleep_message.sleep_library_version > 110500` 门控；此前未上报 `sleep_message`，导致手表降级录制 `version=1`（7-ACC，60 秒窗）并被旧解析器拒收。现手机能力协商已补齐 `tracker_feature.sleep_message`（`sleep_library_version=130500`）与 Watch 7.1.4 设备类型（`10061/10062/10065–10068`），重连握手后手表自动切回高精度 `version=2`（8-ACC，30 秒窗）；同时 `LocalSleepAnalyzer` 新增 `version=1`（7-ACC，`local_sensor_7acc_v1`）离线抢救推理（复用随包 `SleepInterface` JNI 与 1.4.24 评分）及未压缩 JSON 支持。\n- **修复：7.x `sleep_combined` 关联与评分/效率解析**：`SleepParser`、投影与健康导出 v7 接入 `sleep_combined` / `combined_id` 关联（防多子段时长翻倍），修复 `quality=0` 遮蔽 `sleep_score`、浮点 `efficiency` 截断并兼容未压缩 `sleep_status`。\n- **验证与验收边界**：版本 `0.0.43.001`（`43001`），沿用正式签名作为 Nightly 预发布。本地通过 Spotless、929 项 JVM 单测、Lint（0 错误）、Release 构建、1,595 项双语资源、101 项脚本回归与公开资源检查；Watch `7.1.4` 切回 `version=2` 与真机 7-ACC 原生 JNI 推理待真机验收。",
+  "source_name": "galaxy-watch-manager-free-0.0.43.001-source.tar.gz",
+  "source_size": 5935568,
+  "source_sha256": "3fca8a7c36076fea11c7b8ece4cde6b26205262dc8ad713410ef5e4539e412b8",
+  "source_url": "https://raw.githubusercontent.com/crossly/galaxy-watch-manager-free-feed/b96c6c0b5960d0c7094797df43987daee6fcffa8/galaxy-watch-manager-free-0.0.43.001-source.tar.gz"
 }
